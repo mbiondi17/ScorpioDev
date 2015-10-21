@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c7893db11a27501428b90d546adc6d79
+timeCreated: 1444512867
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - infantryPrefab: {fileID: 133512, guid: 4ebfe8d1226518f4380099d081aea06f, type: 2}
+  - armorPrefab: {instanceID: 0}
+  - artilleryPrefab: {instanceID: 0}
+  - gameManager: {fileID: 122216, guid: 4915501e9ade3004e9909774649b46c7, type: 2}
+  - newUnit: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
