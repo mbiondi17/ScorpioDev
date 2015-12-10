@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class CameraMovement : MonoBehaviour {
@@ -12,13 +12,17 @@ public class CameraMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKey("w"))
+        if (Input.GetKey("w") && this.transform.position.z < 150)
             transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
-        if (Input.GetKey("s"))
+		if (Input.GetKey("s") && this.transform.position.z > -150)
             transform.Translate(-Vector3.forward * Time.deltaTime * speed, Space.World);
-        if (Input.GetKey("a"))
+		if (Input.GetKey("a") && this.transform.position.x > -150)
             transform.Translate(Vector3.left * Time.deltaTime * speed, Space.World);
-        if (Input.GetKey("d"))
+		if (Input.GetKey("d") && this.transform.position.x < 150)
             transform.Translate(-Vector3.left * Time.deltaTime * speed, Space.World);
-    }
+		if (Input.GetKey("q") && this.transform.position.y < 150)
+			transform.Translate(0, Time.deltaTime * speed, Time.deltaTime * speed, Space.World);
+		if (Input.GetKey("e") && this.transform.position.y > 1)
+			transform.Translate(0, -(Time.deltaTime * speed), -(Time.deltaTime * speed), Space.World);
+	}
 }

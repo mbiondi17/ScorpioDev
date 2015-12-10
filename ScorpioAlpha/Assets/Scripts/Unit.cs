@@ -1,22 +1,24 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Unit : MonoBehaviour {
 
 	public GameObject target = null;
 	public GameManager gameManager;
-	public float health;
-	public float damage;
+	public GameObject bulletPrefab;
+
+	public float roundsPerSecond = 1;
+	public float nextFire = 0.0f;
+
 
 	// Use this for initialization
 	void Start () {
-		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager>();
-		Debug.Log (GetComponent<Renderer> ().material.color);
+		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		//Debug.Log (target);
 	}
 
 	public void setNavMeshTarget() {
@@ -25,20 +27,84 @@ public class Unit : MonoBehaviour {
 		}
 	}
 
-	/*public void OnMouseDown() {
-		if (gameManager.selectedUnit == this.gameObject) {
+	public void OnMouseDown() {
+		//Debug.Log ("I am Clicked");
+		if (gameManager.selectedUnit == this.gameObject)
 			gameManager.selectedUnit = null;
-			GetComponent<Renderer>().material.color = new Color(0.647f, 0.629f, 0f);
-		}
 		else {
 			gameManager.selectedUnit = this.gameObject;
-			GetComponent<Renderer>().material.color = Color.white;
-		}
-	}*/
-
-	public void OnCollisionStay(Collision collisionInfo){
-		if (collisionInfo.gameObject.tag == "Enemy") {
-			collisionInfo.gameObject.GetComponent<Enemy>().health -= damage * Time.deltaTime;
 		}
 	}
+
+	void OnTriggerStay(Collider co) {
+		/*
+Objective can never attack
+Armor and artillery can only attack if the other collider is tagged as a Wall
+Otherwise, a unit can only attack something tagged as an "Enemy" or an "Objective"
+		 */
+		if(this.tag != "Objective") {
+			if (
+				(((this.name.Contains("Armor") || this.name.Contains("Artillery")) && co.tag == "Wall")
+				||
+				(this.name.Contains("Infantry") && (co.tag == "Enemy" || co.tag == "Objective")))
+				&& 
+				Time.time > nextFire
+				) {
+				Debug.Log("we did it: stay " + this.name);
+				Vector3 bulletPos = new Vector3(this.transform.position.x + 0.2f, this.transform.position.y, this.transform.position.z);
+				nextFire = Time.time + 1/roundsPerSecond;
+				healthBar health = co.GetComponentInChildren<healthBar>();
+				if(health) 
+				{
+					health.decrease();
+				}
+//				GameObject g = (GameObject)Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
+//				g.GetComponent<Bullet>().target = co.transform;
+				
+			}
+		}
+			
+	}
+//	
+//	void OnTriggerEnter(Collider co) {
+//		if(this.tag != "Objective") {
+//			if (
+//				((this.name.Contains("Armor") || this.name.Contains("Artillery")) && co.tag == "Wall")
+//				||
+//				(this.name.Contains("Infantry") && (co.tag == "Enemy" || co.tag == "Objective"))
+//				&& 
+//				Time.time > nextFire
+//				) {
+//				Debug.Log("we did it: enter " + this.name);
+//
+//				Vector3 bulletPos = new Vector3(this.transform.position.x + 0.2f, this.transform.position.y, this.transform.position.z);
+//				nextFire = Time.time + 1/roundsPerSecond;
+//				GameObject g = (GameObject)Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
+//				g.GetComponent<Bullet>().target = co.transform;
+//			
+//			}
+//		}
+//	}
+//	
+//	void OnTriggerExit(Collider co) {
+//		if(this.tag != "Objective") {
+//			if (
+//				((this.name.Contains("Armor") || this.name.Contains("Artillery")) && co.tag == "Wall")
+//				||
+//				(this.name.Contains("Infantry") && (co.tag == "Enemy" || co.tag == "Objective"))
+//				&& 
+//				Time.time > nextFire
+//				) {
+//				Debug.Log("we did it: exit " + this.name);
+//
+//				Vector3 bulletPos = new Vector3(this.transform.position.x + 0.2f, this.transform.position.y, this.transform.position.z);
+//				nextFire = Time.time + 1/roundsPerSecond;
+//				GameObject g = (GameObject)Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
+//				g.GetComponent<Bullet>().target = co.transform;
+//				
+//			}
+//		}
+//		
+//	}
+
 }

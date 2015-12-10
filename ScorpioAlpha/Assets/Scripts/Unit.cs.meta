@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: d2fd52143f9c2e342b8ee9cb7bbdd61d
-timeCreated: 1444508966
+timeCreated: 1448132937
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - target: {instanceID: 0}
+  - gameManager: {instanceID: 0}
+  - bulletPrefab: {fileID: 130460, guid: 3fbacfc654e9b9f448064e976780d16c, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
