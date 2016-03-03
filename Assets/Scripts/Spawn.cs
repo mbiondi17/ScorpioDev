@@ -36,7 +36,8 @@ public class Spawn : MonoBehaviour {
 	        GetComponentInParent<Transform> ().position.y,
 		    GetComponentInParent<Transform> ().position.z),
 		    Quaternion.identity);
-			gameManager.GetComponent<GameManager> ().selectedUnit = newUnit;
+			gameManager.GetComponent<GameManager> ().selectedUnits.Clear ();
+			gameManager.GetComponent<GameManager> ().selectedUnits.Add(newUnit);
 			infLeft--;
 			infButton.GetComponentInChildren<Text>().text = "Infantry -- Left: " + infLeft;
 		}
@@ -48,7 +49,8 @@ public class Spawn : MonoBehaviour {
 			GetComponentInParent<Transform> ().position.x,
 			GetComponentInParent<Transform> ().position.y,
 			GetComponentInParent<Transform> ().position.z), Quaternion.identity);
-			gameManager.GetComponent<GameManager> ().selectedUnit = newUnit;
+			gameManager.GetComponent<GameManager> ().selectedUnits.Clear ();
+			gameManager.GetComponent<GameManager> ().selectedUnits.Add(newUnit);
 			armLeft--;
 			armButton.GetComponentInChildren<Text>().text = "Armor -- Left: " + armLeft;
 		}
@@ -60,7 +62,8 @@ public class Spawn : MonoBehaviour {
 			GetComponentInParent<Transform> ().position.x,
 			(GetComponentInParent<Transform> ().position.y + 0.5f),
 			GetComponentInParent<Transform> ().position.z), Quaternion.identity);
-			gameManager.GetComponent<GameManager>().selectedUnit = newUnit;
+			gameManager.GetComponent<GameManager> ().selectedUnits.Clear ();
+			gameManager.GetComponent<GameManager> ().selectedUnits.Add(newUnit);
 			artLeft--;
 			artButton.GetComponentInChildren<Text>().text = "Artillery -- Left: " + artLeft;
 		}

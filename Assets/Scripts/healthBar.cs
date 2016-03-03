@@ -44,7 +44,7 @@ public class healthBar : MonoBehaviour {
 		m_Slider.value = m_CurrentHealth;
 		
 		// Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
-		m_FillImage.color = Color.Lerp (m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
+		m_FillImage.color = Color.Lerp (m_FullHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
 	}
 
 	private void OnDeath ()
@@ -52,7 +52,7 @@ public class healthBar : MonoBehaviour {
 		// Set the flag so that this function is only called once.
 		m_Dead = true;
 
-		// Turn the tank off.
+		// Turn the enemy unit off.
 		//gameObject.SetActive (false);
 		Destroy(gameObject);
 	}
