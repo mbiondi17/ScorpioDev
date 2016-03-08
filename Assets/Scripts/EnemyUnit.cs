@@ -5,8 +5,15 @@ public class EnemyUnit : MonoBehaviour {
 	
 	public GameObject target = null;
 	public GameObject bulletPrefab;
-	
-	public float roundsPerSecond = 1;
+
+	public int health = 15;
+	public int attack = 2; 
+	public int dex = 15;
+	public float range = 5.0f;
+	public int speed = 1;
+
+	public bool isStatic = false;
+
 	public float nextFire = 0.0f;
 	
 	// Use this for initialization
@@ -16,47 +23,29 @@ public class EnemyUnit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log (target);
+		if (target != null && !isStatic) {
+			GetComponent<NavMeshAgent> ().destination = target.transform.position;
+		} 
 	}
 
 	
 	void OnTriggerStay(Collider co) {
-		if(this.tag != "Objective"){
+		if (this.tag != "Objective") {
 			if ((co.tag == "Player") && Time.time > nextFire) {
-				nextFire = Time.time + 1/roundsPerSecond;
-				healthBar health = co.GetComponentInChildren<healthBar>();
-				if(health) 
-				{
-					health.decrease();
+				nextFire = Time.time + 1 / speed;
+				healthBar health = co.GetComponentInChildren<healthBar> ();
+				if (health) {
+					int hit = Random.Range (0, 101);
+					if (hit <= 100 - co.GetComponent<Unit> ().dex) {
+						health.decrease (attack);
+					}
 				}
-				//GameObject g = (GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-				//g.GetComponent<Bullet>().target = co.transform;
-				
+				else {
+					target = null;
+				}
 			}
 		}
-		
 	}
-//	
-//	void OnTriggerEnter(Collider co) {
-//		if(this.tag != "Objective"){
-//			if ((co.tag == "Player") && Time.time > nextFire) {
-//				nextFire = Time.time + 1/roundsPerSecond;
-//				GameObject g = (GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-//				g.GetComponent<Bullet>().target = co.transform;
-//				
-//			}
-//		}
-//	}
-//	
-//	void OnTriggerExit(Collider co) {
-//		if(this.tag != "Objective"){
-//			if ((co.tag == "Player") && Time.time > nextFire) {
-//				nextFire = Time.time + 1/roundsPerSecond;
-//				GameObject g = (GameObject)Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-//				g.GetComponent<Bullet>().target = co.transform;
-//				
-//			}
-//		}
-//	}
-	
+
+
 }

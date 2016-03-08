@@ -45,8 +45,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AggroScript.cs" />
+     <Compile Include="Assets\RangeScript.cs" />
      <Compile Include="Assets\Scripts\BarracksUpgrade.cs" />
-     <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\EnemyUnit.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />

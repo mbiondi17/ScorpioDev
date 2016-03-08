@@ -7,15 +7,18 @@ public class Spawn : MonoBehaviour {
 	public GameObject infantryPrefab;
 	public GameObject armorPrefab;
 	public GameObject artilleryPrefab;
+	public GameObject archerPrefab;
 
 	public Button infButton;
 	public Button armButton;
 	public Button artButton;
+	public Button archButton;
 
 
-	public int infLeft = 6;
+	public int infLeft = 5;
 	public int armLeft = 1;
 	public int artLeft = 1;
+	public int archLeft = 1;
 
 	public GameObject gameManager;
 	public GameObject newUnit = null;
@@ -24,6 +27,7 @@ public class Spawn : MonoBehaviour {
 	void Start(){
 		gameManager = GameObject.Find ("GameManager");
 		infButton.GetComponentInChildren<Text>().text = "Infantry -- Left: " + infLeft;
+		archButton.GetComponentInChildren<Text>().text = "Archers -- Left: " + archLeft;
 		armButton.GetComponentInChildren<Text>().text = "Armor -- Left: " + armLeft;
 		artButton.GetComponentInChildren<Text>().text = "Artillery -- Left: " + artLeft;
 
@@ -40,6 +44,20 @@ public class Spawn : MonoBehaviour {
 			gameManager.GetComponent<GameManager> ().selectedUnits.Add(newUnit);
 			infLeft--;
 			infButton.GetComponentInChildren<Text>().text = "Infantry -- Left: " + infLeft;
+		}
+	}
+
+	public void SpawnArcher() {
+		if (archLeft > 0) {
+			newUnit = (GameObject)Instantiate (archerPrefab, new Vector3 (
+				GetComponentInParent<Transform> ().position.x,
+				GetComponentInParent<Transform> ().position.y,
+				GetComponentInParent<Transform> ().position.z),
+			                                   Quaternion.identity);
+			gameManager.GetComponent<GameManager> ().selectedUnits.Clear ();
+			gameManager.GetComponent<GameManager> ().selectedUnits.Add(newUnit);
+			archLeft--;
+			archButton.GetComponentInChildren<Text>().text = "Archers -- Left: " + archLeft;
 		}
 	}
 

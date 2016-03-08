@@ -1,10 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/healthBar.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Unit.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Unit.cs" Line="31" Column="8" />
-      <File FileName="Assets/Scripts/healthBar.cs" Line="47" Column="41" />
+      <File FileName="Assets/AggroScript.cs" Line="43" Column="47" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="129" Column="63" />
+      <File FileName="Assets/Scripts/Unit.cs" Line="17" Column="25" />
+      <File FileName="Assets/Scripts/healthBar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EnemyUnit.cs" Line="47" Column="4" />
+      <File FileName="Assets/RangeScript.cs" Line="23" Column="130" />
+      <File FileName="Assets/Scripts/Spawn.cs" Line="10" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

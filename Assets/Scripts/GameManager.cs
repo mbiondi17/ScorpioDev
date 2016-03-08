@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour {
 						//NavMeshTarget accordingly.
 						foreach (GameObject selectedUnit in selectedUnits) {
 							if( (selectedUnit.name.Contains("Infantry") && 
-							    (hit.collider.gameObject.tag.Equals ("Enemy") || hit.collider.gameObject.tag.Equals ("Objective")))
+							    (hit.transform.tag.Equals ("Enemy") || hit.collider.gameObject.tag.Equals ("Objective")))
 							   	  || ((selectedUnit.name.Contains ("Artillery") || selectedUnit.name.Contains("Armor")) 
 							    	&& hit.collider.gameObject.tag.Equals ("Wall"))){
 								selectedUnit.GetComponent<Unit> ().target = hit.transform.gameObject;
@@ -94,6 +94,12 @@ public class GameManager : MonoBehaviour {
 						selectedUnits.Clear();
 					}
 				}
+			}
+		}
+
+		foreach (GameObject unit in selectedUnits) {
+			if(unit == null) {
+				selectedUnits.Remove(unit);
 			}
 		}
 
@@ -120,11 +126,17 @@ public class GameManager : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.Alpha2)) {
 			
+			GameObject.Find("Spawn1").GetComponent<Spawn>().SpawnArcher();
+			
+		}
+
+		if(Input.GetKeyDown(KeyCode.Alpha3)) {
+			
 			GameObject.Find("Spawn1").GetComponent<Spawn>().SpawnArmor();
 
 		}
 
-		if(Input.GetKeyDown(KeyCode.Alpha3)) {
+		if(Input.GetKeyDown(KeyCode.Alpha4)) {
 			
 				GameObject.Find("Spawn1").GetComponent<Spawn>().SpawnArtillery();
 

@@ -10,6 +10,15 @@ public class Unit : MonoBehaviour {
 	public float roundsPerSecond = 1;
 	public float nextFire = 0.0f;
 
+	public int health = 10;
+	public int attack = 2; 
+	public int dex = 15;
+	public float range = 5.0f;
+	public float speed = 1;
+
+	public AudioSource[] audio;
+	public AudioClip hitClip;
+	public AudioClip missClip;
 
 	public Material[] woodMaterials = new Material[4];
 	public Material[] brickMaterials = new Material[4];
@@ -19,11 +28,14 @@ public class Unit : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		audio = GetComponentsInParent<AudioSource>();
+		hitClip = audio [0].clip;
+		missClip = audio [1].clip;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (gameManager.selectedUnits.Contains(this.gameObject)) {
 			if (on == 0) {
 				this.GetComponentInParent<healthBar>().GetComponentInChildren<healthBar>().m_FullHealthColor = Color.blue;
@@ -60,50 +72,6 @@ Objective can never attack
 Armor and artillery can only attack if the other collider is tagged as a Wall
 Otherwise, a unit can only attack something tagged as an "Enemy" or an "Objective"
 		 */
-	
-	void OnTriggerStay(Collider co) {
-		if ((this.name.Contains("Infantry") 
-		    && (co.tag == "Enemy" || co.tag == "Objective"))
-			&& Time.time > nextFire) {
-			//Debug.Log("we did it " + this.name);
-			nextFire = Time.time + 1/roundsPerSecond;
-			healthBar health = co.GetComponentInChildren<healthBar>();
-			if(health) 
-			{
-				health.decrease();
-			}
-			else {
-				this.target = null;
-			}
 
-			
-		}
-		else if(((this.name.Contains("Armor") || this.name.Contains("Artillery")) && co.tag == "Wall") && Time.time > nextFire) {
-			nextFire = Time.time + 1/roundsPerSecond;
-			//Debug.Log("We're here!");
-			if(co.GetComponentInParent<Renderer>().material.mainTexture == woodMaterials[0].mainTexture) {
-				co.GetComponentInParent<Renderer>().material = woodMaterials[1];
-			}
-			else if(co.GetComponentInParent<Renderer>().material.mainTexture == woodMaterials[1].mainTexture) {
-				co.GetComponentInParent<Renderer>().material = woodMaterials[2];
-			}
-			else if(co.GetComponentInParent<Renderer>().material.mainTexture == woodMaterials[2].mainTexture) {
-				co.GetComponentInParent<Renderer>().material = woodMaterials[3];
-			}
-			else if(co.GetComponentInParent<Renderer>().material.mainTexture == brickMaterials[0].mainTexture) {
-				co.GetComponentInParent<Renderer>().material = brickMaterials[1];
-			}
-			else if(co.GetComponentInParent<Renderer>().material.mainTexture == brickMaterials[1].mainTexture) {
-				co.GetComponentInParent<Renderer>().material = brickMaterials[2];
-			}
-			else if(co.GetComponentInParent<Renderer>().material.mainTexture == brickMaterials[2].mainTexture) {
-				co.GetComponentInParent<Renderer>().material = brickMaterials[3];
-			}
-			else {
-				Destroy(co.gameObject);
-				this.target = null;
-			}
-		}
-	}
 }
 

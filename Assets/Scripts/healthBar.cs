@@ -10,6 +10,7 @@ public class healthBar : MonoBehaviour {
 	public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
 	public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
 
+
 	private int m_CurrentHealth;                      // How much health the tank currently has.
 	private bool m_Dead;                                // Has the tank been reduced beyond zero health yet?
 
@@ -23,10 +24,10 @@ public class healthBar : MonoBehaviour {
 		SetHealthUI();
 	}
 
-	public void decrease ()
+	public void decrease (int damage)
 	{
 		// Reduce current health by the amount of damage done.
-		m_CurrentHealth -= 1;
+		m_CurrentHealth -= damage;
 		
 		// Change the UI elements appropriately.
 		SetHealthUI ();
@@ -52,8 +53,6 @@ public class healthBar : MonoBehaviour {
 		// Set the flag so that this function is only called once.
 		m_Dead = true;
 
-		// Turn the enemy unit off.
-		//gameObject.SetActive (false);
 		Destroy(gameObject);
 	}
 }
