@@ -15,6 +15,13 @@ public class GameManager : MonoBehaviour {
 //	private bool restart;
 	public int nextLevel = 1;
 
+	public int denarii;
+
+	public int upgradeLevelInfantry;
+	public int upgradeLevelArchers;
+	public int upgradeLevelArtillery;
+	public int upgradeLevelArmor;
+
 	public void Awake()
 	{
 		DontDestroyOnLoad(this);
@@ -29,6 +36,11 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		objective = GameObject.FindGameObjectWithTag("Objective");
+		upgradeLevelInfantry = 2;
+		upgradeLevelArchers = 2;
+		upgradeLevelArtillery = 2;
+		upgradeLevelArmor = 2;
+		denarii = 10000;
 
 //		gameOver = false;
 //		restart = false;

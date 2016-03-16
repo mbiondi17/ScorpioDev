@@ -15,15 +15,12 @@ public class BarracksUpgrade : MonoBehaviour {
 	
 	public Text denariiTextBox;
 	
-	public int upgradeLevelInfantry = 1;
-	public int upgradeLevelArchers = 1;
-	public int upgradeLevelArtillery = 1;
-	public int upgradeLevelArmor = 1;
-	
-	public int denarii = 1;
-	
+
+	public GameManager gameManager;
+
 	void Start() {
-		denariiTextBox.text = "Denarii: " + denarii.ToString ();
+		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		denariiTextBox.text = "Denarii: " + gameManager.denarii.ToString ();
 		
 		currentTextInfantry.text = upgradeInfantry1;
 		upgradeTextInfantry.text = upgradeInfantry2;
@@ -39,65 +36,86 @@ public class BarracksUpgrade : MonoBehaviour {
 	}
 	
 	public void upgradeInfantry() {
-		if (upgradeLevelInfantry == 1) {
+		if (gameManager.upgradeLevelInfantry == 1 && gameManager.denarii >= 1000) {
+			gameManager.denarii = gameManager.denarii - 1000;
 			currentTextInfantry.text = upgradeInfantry2;
 			upgradeTextInfantry.text = upgradeInfantry3;
-			upgradeLevelInfantry++;
-		} else if (upgradeLevelInfantry == 2) {
+			gameManager.upgradeLevelInfantry++;
+		} else if (gameManager.upgradeLevelInfantry == 2 && gameManager.denarii >= 1000) {
+			gameManager.denarii = gameManager.denarii - 1000;
 			currentTextInfantry.text = upgradeInfantry3;
 			upgradeTextInfantry.text = upgradeInfantry4;
-			upgradeLevelInfantry++;
-		} else if (upgradeLevelInfantry == 3) {
+			gameManager.upgradeLevelInfantry++;
+		} else if (gameManager.upgradeLevelInfantry == 3 && gameManager.denarii >= 5000) {
+			gameManager.denarii = gameManager.denarii - 5000;
 			currentTextInfantry.text = upgradeInfantry4;
 			upgradeTextInfantry.text = "No more!";
-			upgradeLevelInfantry++;
+			gameManager.upgradeLevelInfantry++;
 		}
+		denariiTextBox.text = "Denarii: " + gameManager.denarii.ToString ();
+
 	}
 	public void upgradeArchers() {
-		if (upgradeLevelArchers == 1) {
+		if (gameManager.upgradeLevelArchers == 1 && gameManager.denarii >= 1500) {
+			gameManager.denarii = gameManager.denarii - 1500;
 			currentTextArchers.text = upgradeArchers1;
 			upgradeTextArchers.text = "No more!";
-			upgradeLevelArchers++;
+			gameManager.upgradeLevelArchers++;
 		}
+		denariiTextBox.text = "Denarii: " + gameManager.denarii.ToString ();
+
 	}
+		
 	public void upgradeArtillery() {
 		Debug.Log ("Upgrade Infantry");
-		if (upgradeLevelArtillery == 1) {
+		if (gameManager.upgradeLevelArtillery == 1 && gameManager.denarii >= 500) {
+			gameManager.denarii = gameManager.denarii - 500;
 			currentTextArtillery.text = upgradeArtillery2;
 			upgradeTextArtillery.text = upgradeArtillery3;
-			upgradeLevelArtillery++;
-		} else if (upgradeLevelArtillery == 2) {
+			gameManager.upgradeLevelArtillery++;
+		} else if (gameManager.upgradeLevelArtillery == 2 && gameManager.denarii >= 500) {
+			gameManager.denarii = gameManager.denarii - 500;
 			currentTextArtillery.text = upgradeArtillery3;
 			upgradeTextArtillery.text = upgradeArtillery4;
-			upgradeLevelArtillery++;
-		} else if (upgradeLevelArtillery == 3) {
+			gameManager.upgradeLevelArtillery++;
+		} else if (gameManager.upgradeLevelArtillery == 3 && gameManager.denarii >= 750) {
+			gameManager.denarii = gameManager.denarii - 750;
 			currentTextArtillery.text = upgradeArtillery4;
 			upgradeTextArtillery.text = upgradeArtillery5;
-			upgradeLevelArtillery++;
-		} else if (upgradeLevelArtillery == 4) {
+			gameManager.upgradeLevelArtillery++;
+		} else if (gameManager.upgradeLevelArtillery == 4 && gameManager.denarii >= 1000) {
+			gameManager.denarii = gameManager.denarii - 1000;
 			currentTextArtillery.text = upgradeArtillery5;
 			upgradeTextArtillery.text = upgradeArtillery6;
-			upgradeLevelArtillery++;
-		} else if (upgradeLevelArtillery == 5) {
+			gameManager.upgradeLevelArtillery++;
+		} else if (gameManager.upgradeLevelArtillery == 5 && gameManager.denarii >= 1000) {
+			gameManager.denarii = gameManager.denarii - 1000;
 			currentTextArtillery.text = upgradeArtillery6;
 			upgradeTextArtillery.text = upgradeArtillery7;
-			upgradeLevelArtillery++;
-		} else if (upgradeLevelArtillery == 6) {
+			gameManager.upgradeLevelArtillery++;
+		} else if (gameManager.upgradeLevelArtillery == 6 && gameManager.denarii >= 5000) {
+			gameManager.denarii = gameManager.denarii - 5000;
 			currentTextArtillery.text = upgradeArtillery7;
 			upgradeTextArtillery.text = "No more!";
-			upgradeLevelArtillery++;
+			gameManager.upgradeLevelArtillery++;
 		}
+		denariiTextBox.text = "Denarii: " + gameManager.denarii.ToString ();
+
 	}
 	public void upgradeArmor() {
-		if (upgradeLevelArmor == 1) {
+		if (gameManager.upgradeLevelArmor == 1 && gameManager.denarii >= 500) {
+			gameManager.denarii = gameManager.denarii - 500;
 			currentTextArmor.text = upgradeArmor2;
 			upgradeTextArmor.text = upgradeArmor3;
-			upgradeLevelArmor++;
-		} else if (upgradeLevelArmor == 2) {
+			gameManager.upgradeLevelArmor++;
+		} else if (gameManager.upgradeLevelArmor == 2 && gameManager.denarii >= 3000) {
+			gameManager.denarii = gameManager.denarii - 3000;
 			currentTextArmor.text = upgradeArmor3;
 			upgradeTextArmor.text = "No more!";
-			upgradeLevelArmor++;
+			gameManager.upgradeLevelArmor++;
 		}
+		denariiTextBox.text = "Denarii: " + gameManager.denarii.ToString ();
+
 	}
 	
 	
