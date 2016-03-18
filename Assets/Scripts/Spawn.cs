@@ -23,6 +23,8 @@ public class Spawn : MonoBehaviour {
 	public GameManager gameManager;
 	public GameObject newUnit = null;
 	public bool targetFound = false;
+
+	public bool isPaused = false;
 	
 	void Start(){
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -33,8 +35,14 @@ public class Spawn : MonoBehaviour {
 		
 	}
 
+	void Update() 
+	{
+		isPaused = gameManager.getPaused ();
+	}
+
+
 	public void SpawnInfantry() {
-		if (infLeft > 0) {
+		if (infLeft > 0 && !isPaused) {
 			newUnit = (GameObject)Instantiate (infantryPrefab, new Vector3 (
 			GetComponentInParent<Transform> ().position.x,
 	        GetComponentInParent<Transform> ().position.y,
@@ -75,7 +83,7 @@ public class Spawn : MonoBehaviour {
 	}
 
 	public void SpawnArcher() {
-		if (archLeft > 0) {
+		if (archLeft > 0 && !isPaused) {
 			newUnit = (GameObject)Instantiate (archerPrefab, new Vector3 (
 				GetComponentInParent<Transform> ().position.x,
 				GetComponentInParent<Transform> ().position.y,
@@ -98,7 +106,7 @@ public class Spawn : MonoBehaviour {
 	}
 
 	public void SpawnArmor() {
-		if (armLeft > 0) {
+		if (armLeft > 0 && !isPaused) {
 			newUnit = (GameObject)Instantiate (armorPrefab, new Vector3 (
 			GetComponentInParent<Transform> ().position.x,
 			GetComponentInParent<Transform> ().position.y,
@@ -136,7 +144,7 @@ public class Spawn : MonoBehaviour {
 	}
 
 	public void SpawnArtillery() {
-		if (artLeft > 0) {
+		if (artLeft > 0 && !isPaused) {
 			newUnit = (GameObject)Instantiate (artilleryPrefab, new Vector3 (
 			GetComponentInParent<Transform> ().position.x,
 			(GetComponentInParent<Transform> ().position.y + 0.5f),

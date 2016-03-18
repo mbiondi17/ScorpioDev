@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour {
 	public int upgradeLevelArtillery;
 	public int upgradeLevelArmor;
 
+	public bool getPaused() {
+		return this.isPaused;
+	}
+
 	public void Awake()
 	{
 		DontDestroyOnLoad(this);
@@ -136,7 +140,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		//Reset the current level. For development purposes.
-		if(Input.GetKeyDown(KeyCode.R)) 
+		if(Input.GetKeyDown(KeyCode.R) && !isPaused) 
 		{
 
 			Application.LoadLevel (Application.loadedLevel);
@@ -144,31 +148,31 @@ public class GameManager : MonoBehaviour {
 		}
 
 		//Quit the level on "ESC"
-		if (Input.GetKey("escape"))
+		if (Input.GetKey("escape") && !isPaused)
 			Application.Quit();
 
 		//
 		// keys 1, 2, and 3 also spawn units
 		//
-		if(Input.GetKeyDown(KeyCode.Alpha1)) {
+		if(Input.GetKeyDown(KeyCode.Alpha1) && !isPaused) {
 			
 			GameObject.Find("Spawn1").GetComponent<Spawn>().SpawnInfantry();
 
 		}
 
-		if(Input.GetKeyDown(KeyCode.Alpha2)) {
+		if(Input.GetKeyDown(KeyCode.Alpha2) && !isPaused) {
 			
 			GameObject.Find("Spawn1").GetComponent<Spawn>().SpawnArcher();
 			
 		}
 
-		if(Input.GetKeyDown(KeyCode.Alpha3)) {
+		if(Input.GetKeyDown(KeyCode.Alpha3) && !isPaused) {
 			
 			GameObject.Find("Spawn1").GetComponent<Spawn>().SpawnArmor();
 
 		}
 
-		if(Input.GetKeyDown(KeyCode.Alpha4)) {
+		if(Input.GetKeyDown(KeyCode.Alpha4) && !isPaused) {
 			
 				GameObject.Find("Spawn1").GetComponent<Spawn>().SpawnArtillery();
 
