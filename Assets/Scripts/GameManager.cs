@@ -8,15 +8,26 @@ public class GameManager : MonoBehaviour {
 	public List<GameObject> selectedUnits = new List<GameObject>();
 	public GameObject objective = null;
 
+	public GameObject HelpMenu = null;
+
 //	public GUIText restartText;
 //	public GUIText gameOverText;
 
 //	private bool gameOver;
 //	private bool restart;
+
+	private bool isPaused = false;
+
 	public int nextLevel = 1;
-
 	public int denarii;
+	public int kills = 0;
+	public int unitsLeft = 0;
 
+	public int freeXMax = 0;
+	public int freeZMax = 0;
+	public int freeXMin = 0;
+	public int freeZMin = 0;
+	
 	public int upgradeLevelInfantry;
 	public int upgradeLevelArchers;
 	public int upgradeLevelArtillery;
@@ -42,6 +53,9 @@ public class GameManager : MonoBehaviour {
 		upgradeLevelArmor = 2;
 		denarii = 10000;
 
+		kills = 0;
+		unitsLeft = 0;
+
 //		gameOver = false;
 //		restart = false;
 //
@@ -54,6 +68,9 @@ public class GameManager : MonoBehaviour {
 
 		//Check if the level has been beaten (that is, there's no objective)
 		if (!Application.loadedLevelName.Equals (("Barracks")) && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
+			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
+			unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
+			denarii = kills*100 + unitsLeft*100;
 			Application.LoadLevel ("Barracks");
 		}
 
@@ -75,6 +92,7 @@ public class GameManager : MonoBehaviour {
 				RaycastHit hit;
 				
 				if (Physics.Raycast (ray, out hit, 5000)) {
+					//Debug.Log(hit.point);
 					if(!selectedUnits.Contains(hit.transform.gameObject)) {
 						//Spawn script places units at y = -50
 						//No particular reason this comes after the above if statement. Perhaps take out
@@ -98,6 +116,8 @@ public class GameManager : MonoBehaviour {
 							}
 
 							else {
+//								if((hit.point.x > freeXMin) && (hit.point.x < freeXMax) 
+//							        && (hit.point.z > freeZMin) && (hit.point.z < freeZMax)){
 								selectedUnit.GetComponent<Unit> ().target = null;
 								selectedUnit.GetComponent<Unit> ().targetPoint = hit.point;
 								selectedUnit.GetComponent<Unit> ().setNavMeshTarget();
@@ -152,6 +172,17 @@ public class GameManager : MonoBehaviour {
 			
 				GameObject.Find("Spawn1").GetComponent<Spawn>().SpawnArtillery();
 
+		}
+
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			isPaused = !isPaused;
+			HelpMenu.SetActive(isPaused);
+			if(isPaused) {
+				Time.timeScale = 0.0f;
+			}
+			else {
+				Time.timeScale = 1.0f;
+			}
 		}
 	
 	}

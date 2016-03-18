@@ -32,6 +32,7 @@ public class EnemyUnit : MonoBehaviour {
 	void OnTriggerStay(Collider co) {
 		if (this.tag != "Objective") {
 			if ((co.tag == "Player") && Time.time > nextFire) {
+				GetComponent<NavMeshAgent>().destination = GetComponent<Transform>().position;
 				nextFire = Time.time + 1 / speed;
 				healthBar health = co.GetComponentInChildren<healthBar> ();
 				if (health) {

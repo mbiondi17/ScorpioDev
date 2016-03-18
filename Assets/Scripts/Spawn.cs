@@ -50,25 +50,25 @@ public class Spawn : MonoBehaviour {
 				newUnit.GetComponent<Unit> ().attack = 1;
 				newUnit.GetComponent<Unit> ().dex = 10;
 				newUnit.GetComponent<Unit>().speed = 4;
-				newUnit.GetComponent<Unit> ().range = 1;
+				newUnit.GetComponent<Unit> ().range = 6;
 			} else if (gameManager.upgradeLevelInfantry == 2) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 1;
 				newUnit.GetComponent<Unit> ().dex = 15;
 				newUnit.GetComponent<Unit>().speed = 5;
-				newUnit.GetComponent<Unit> ().range = 1;
+				newUnit.GetComponent<Unit> ().range = 6;
 			} else if (gameManager.upgradeLevelInfantry == 3) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 3;
 				newUnit.GetComponent<Unit> ().dex = 15;
 				newUnit.GetComponent<Unit>().speed = 6;
-				newUnit.GetComponent<Unit> ().range = 1;
+				newUnit.GetComponent<Unit> ().range = 6;
 			} else if (gameManager.upgradeLevelInfantry == 4) {
 				newUnit.GetComponent<Unit>().health = 5;
 				newUnit.GetComponent<Unit> ().attack = 5;
 				newUnit.GetComponent<Unit> ().dex = 25;
 				newUnit.GetComponent<Unit>().speed = 7;
-				newUnit.GetComponent<Unit> ().range = 1;
+				newUnit.GetComponent<Unit> ().range = 6;
 			}
 
 		}
@@ -114,21 +114,21 @@ public class Spawn : MonoBehaviour {
 				newUnit.GetComponent<Unit> ().attack = 10;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 4;
-				newUnit.GetComponent<Unit> ().range = 1;
+				newUnit.GetComponent<Unit> ().range = 30;
 
 			} else if (gameManager.upgradeLevelArmor == 2) {
 				newUnit.GetComponent<Unit>().health = 10;
 				newUnit.GetComponent<Unit> ().attack = 15;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 2;
-				newUnit.GetComponent<Unit> ().range = 1;
+				newUnit.GetComponent<Unit> ().range = 30;
 
 			} else if (gameManager.upgradeLevelArmor == 3) {
 				newUnit.GetComponent<Unit>().health = 15;
 				newUnit.GetComponent<Unit> ().attack = 15;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 3;
-				newUnit.GetComponent<Unit> ().range = 1;
+				newUnit.GetComponent<Unit> ().range = 30;
 
 			} 
 
@@ -150,49 +150,49 @@ public class Spawn : MonoBehaviour {
 				newUnit.GetComponent<Unit> ().attack = 2;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 3;
-				newUnit.GetComponent<Unit> ().range = 10;
+				newUnit.GetComponent<Unit> ().range = 40;
 
 			} else if (gameManager.upgradeLevelArtillery == 2) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 4;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 3;
-				newUnit.GetComponent<Unit> ().range = 10;
+				newUnit.GetComponent<Unit> ().range = 40;
 
 			} else if (gameManager.upgradeLevelArtillery == 3) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 4;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 3;
-				newUnit.GetComponent<Unit> ().range = 13;
+				newUnit.GetComponent<Unit> ().range = 43;
 
 			} else if (gameManager.upgradeLevelArtillery == 4) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 4;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 3;
-				newUnit.GetComponent<Unit> ().range = 13;
+				newUnit.GetComponent<Unit> ().range = 43;
 				//stationary units
 			} else if (gameManager.upgradeLevelArtillery == 5) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 5;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 3;
-				newUnit.GetComponent<Unit> ().range = 13;
+				newUnit.GetComponent<Unit> ().range = 43;
 
 			} else if (gameManager.upgradeLevelArtillery == 6) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 5;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 3;
-				newUnit.GetComponent<Unit> ().range = 15;
+				newUnit.GetComponent<Unit> ().range = 45;
 
 			} else if (gameManager.upgradeLevelArtillery == 7) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 6;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 3;
-				newUnit.GetComponent<Unit> ().range = 15;
+				newUnit.GetComponent<Unit> ().range = 45;
 
 			}
 

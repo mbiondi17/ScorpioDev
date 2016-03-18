@@ -7,20 +7,33 @@ public class BarracksUpgrade : MonoBehaviour {
 	public Text upgradeTextArchers;
 	public Text upgradeTextArtillery;
 	public Text upgradeTextArmor;
-	
+
 	public Text currentTextInfantry;
 	public Text currentTextArchers;
 	public Text currentTextArtillery;
 	public Text currentTextArmor;
+
+	public int upgradeLevelInfantry;
+	public int upgradeLevelArchers;
+	public int upgradeLevelArtillery;
+	public int upgradeLevelArmor;
 	
 	public Text denariiTextBox;
-	
 
+	public int denarii;
+	
 	public GameManager gameManager;
 
 	void Start() {
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-		denariiTextBox.text = "Denarii: " + gameManager.denarii.ToString ();
+
+		denarii = GetComponentInParent<GameManager>().denarii;
+		denariiTextBox.text = "Denarii: " + denarii;
+
+		upgradeLevelInfantry = 1;
+		upgradeLevelArchers = 1;
+		upgradeLevelArtillery = 1;
+		upgradeLevelArmor = 1;
 		
 		currentTextInfantry.text = upgradeInfantry1;
 		upgradeTextInfantry.text = upgradeInfantry2;

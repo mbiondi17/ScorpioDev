@@ -53,6 +53,9 @@ public class healthBar : MonoBehaviour {
 		// Set the flag so that this function is only called once.
 		m_Dead = true;
 
+		if (gameObject.tag == "Enemy") {
+			GameObject.Find("GameManager").GetComponent<GameManager>().kills++;
+		}
 		Destroy(gameObject);
 	}
 }

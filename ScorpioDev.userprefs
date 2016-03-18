@@ -1,15 +1,12 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BarracksUpgrade.cs">
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\Unit.cs" Line="68" Column="3" />
-      <File FileName="Assets\Scripts\BarracksUpgrade.cs" Line="118" Column="3" />
-      <File FileName="Assets\Scripts\Spawn.cs" Line="54" Column="1" />
-      <File FileName="Assets\Scripts\NextLevel.cs" Line="21" Column="15" />
-      <File FileName="Assets\AggroScript.cs" Line="12" Column="4" />
-      <File FileName="Assets\Scripts\GameManager.cs" Line="43" Column="17" />
-      <File FileName="Assets\Scripts\healthBar.cs" Line="1" Column="1" />
-      <File FileName="Assets\RangeScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/AggroScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/RangeScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Unit.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EnemyUnit.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="22" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
