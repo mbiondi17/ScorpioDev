@@ -24,5 +24,12 @@ public class CameraMovement : MonoBehaviour {
 			transform.Translate(0, Time.deltaTime * speed, Time.deltaTime * speed, Space.World);
 		if (Input.GetKey("e") && this.transform.position.y > 1)
 			transform.Translate(0, -(Time.deltaTime * speed), -(Time.deltaTime * speed), Space.World);
+		if ((Input.GetAxis("Mouse ScrollWheel") < 0) && this.transform.position.y < 150)
+			transform.Translate(0, Time.deltaTime * 3 * speed, Time.deltaTime * 3 * speed, Space.World);
+		if ((Input.GetAxis("Mouse ScrollWheel") > 0) && this.transform.position.y > 1)
+			transform.Translate(0, -(Time.deltaTime * 3 * speed), -(Time.deltaTime * 3 * speed), Space.World);
+
+
+
 	}
 }
