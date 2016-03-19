@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour {
 	public int upgradeLevelArtillery;
 	public int upgradeLevelArmor;
 
+	public GameObject unitToRemove = null;
 	public bool getPaused() {
 		return this.isPaused;
 	}
@@ -45,7 +46,6 @@ public class GameManager : MonoBehaviour {
 		{
 			Destroy(gameObject);
 		}
-	
 	}
 
 	// Use this for initialization
@@ -129,8 +129,21 @@ public class GameManager : MonoBehaviour {
 						}
 						selectedUnits.Clear();
 					}
+					else {
+						foreach(GameObject unit in selectedUnits) {
+							unit.GetComponent<NavMeshAgent>().destination = unit.transform.position;
+							unit.GetComponent<Unit>().target = null;
+							unit.GetComponent<Unit>().targetPoint = unit.transform.position;
+
+						}
+					}
 				}
 			}
+		}
+
+		if(unitToRemove != null) {
+			selectedUnits.Remove(unitToRemove);
+			unitToRemove = null;
 		}
 
 		foreach (GameObject unit in selectedUnits) {
@@ -138,6 +151,7 @@ public class GameManager : MonoBehaviour {
 				selectedUnits.Remove(unit);
 			}
 		}
+
 
 		//Reset the current level. For development purposes.
 		if(Input.GetKeyDown(KeyCode.R) && !isPaused) 
