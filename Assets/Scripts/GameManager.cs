@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour {
 	public int upgradeLevelArtillery;
 	public int upgradeLevelArmor;
 
+	public Texture2D moveIcon;
 	public GameObject unitToRemove = null;
 	public bool getPaused() {
 		return this.isPaused;
@@ -69,6 +70,18 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		Ray tryRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit thisHit;
+
+		if (Physics.Raycast (tryRay, out thisHit, 5000)) {
+			if (selectedUnits.Count == 0) {
+				Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
+			} else if (!(thisHit.transform.gameObject.tag == "Enemy" || thisHit.transform.gameObject.tag == "Objective"
+				|| thisHit.transform.gameObject.tag == "Player" || thisHit.transform.gameObject.tag == "Wall")) {
+				Cursor.SetCursor (moveIcon, Vector2.zero, CursorMode.Auto);
+			}
+		}
 
 		//Check if the level has been beaten (that is, there's no objective)
 		if (!Application.loadedLevelName.Equals (("Barracks")) && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {

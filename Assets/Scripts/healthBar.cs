@@ -57,5 +57,8 @@ public class healthBar : MonoBehaviour {
 			GameObject.Find("GameManager").GetComponent<GameManager>().kills++;
 		}
 		Destroy(gameObject);
+			
+		Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
+
 	}
 }

@@ -4,7 +4,8 @@ using System.Collections;
 public class EnemyUnit : MonoBehaviour {
 	
 	public GameObject target = null;
-	public GameObject bulletPrefab;
+	public Texture2D attackIcon;
+	public Texture2D noAttackIcon;
 
 	public int health = 15;
 	public int attack = 2; 
@@ -46,6 +47,30 @@ public class EnemyUnit : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	void OnMouseOver() {
+		GameManager gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+		bool attackable = false;
+		foreach (GameObject unit in gameManager.selectedUnits) {
+			if(unit.name.Contains ("Infantry") || unit.name.Contains ("Archer")) {
+				attackable = true;
+			}
+		}
+
+		if (attackable) {
+			Cursor.SetCursor(attackIcon, new Vector2((float)(attackIcon.width)/2.0f, (float)(attackIcon.height)/2.0f), CursorMode.Auto);
+		}
+
+		if (!attackable && gameManager.selectedUnits.Count > 0) {
+			Cursor.SetCursor(noAttackIcon, new Vector2((float)(attackIcon.width)/2.0f, (float)(attackIcon.height)/2.0f), CursorMode.Auto);
+		}
+	}
+
+	void OnMouseExit() {
+
+		Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
+
 	}
 
 
