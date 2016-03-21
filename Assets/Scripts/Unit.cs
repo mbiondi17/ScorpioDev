@@ -25,7 +25,9 @@ public class Unit : MonoBehaviour {
 	
 	private int on = 0;
 	private float timeClicked = 0.0f;
-	private float selectAllDelay = 0.5f;
+	private float selectRadiusDelay = 0.5f;
+	private float selectAllDelay = 1.0f;
+	private bool selectRadius = false;
 	private bool selectAll = false;
 	
 	// Use this for initialization
@@ -71,6 +73,11 @@ public class Unit : MonoBehaviour {
 	}
 
 	public void OnMouseOver() {
+
+		if (gameManager.selectedUnits.Count > 0) {
+			Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
+		}
+
 		if(Input.GetMouseButton (0)) {
 			if (timeClicked == 0.0f) {
 				timeClicked = Time.time;
@@ -78,7 +85,22 @@ public class Unit : MonoBehaviour {
 			else if ((Time.time - timeClicked) >= selectAllDelay) {
 				selectAll = true;
 			}
-			
+
+			else if ((Time.time - timeClicked) >= selectRadiusDelay) {
+				selectRadius = true;
+			}
+
+			if(selectRadius) {
+				GameObject[] toAdd = GameObject.FindGameObjectsWithTag("Player");
+				foreach(GameObject unit in toAdd) {
+					if(unit.name == this.name && (Vector3.Distance(this.transform.position, unit.transform.position) < 30.0f)) {
+						if(!gameManager.selectedUnits.Contains(unit)) {
+							gameManager.selectedUnits.Add(unit);
+						}
+					}
+				}
+				selectRadius = false;
+			}
 			if(selectAll) {
 				GameObject[] toAdd = GameObject.FindGameObjectsWithTag("Player");
 				foreach(GameObject unit in toAdd) {
@@ -88,6 +110,7 @@ public class Unit : MonoBehaviour {
 						}
 					}
 				}
+				selectRadius = false;
 				selectAll = false;
 				timeClicked = 0.0f;
 			}
