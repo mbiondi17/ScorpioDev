@@ -103,8 +103,26 @@ public class Tutorial : MonoBehaviour {
 				"For now, just send your legionnaire to an \nempty spot on the battlefield.";
 		}
 
-		if (MoveUnit.isComplete ()) {
+		if (MoveUnit.isComplete () && !SpawnOneUnitWithKey.isComplete()) {
 			MvUnit.enabled = false;
+			SpawnUnitWithKey.enabled = true;
+		}
+
+		if (SpawnOneUnitWithKey.GetComponent<SpawnUnitWithKey> ().targetedEnemy) {
+			SpawnUnitWithKey.text = "Let's not get hasty, General! \nThere will be plenty of time for combat later! \n" +
+				"For now, just send your battering ram to an \nempty spot on the battlefield.";
+		}
+
+		if (SpawnOneUnitWithKey.isComplete () && !SpawnTwoUnitsAndMove.isComplete()) {
+			SpawnTwoUnitsAndMove.GetComponent<SpawnTwoAndMove>().startThisObj = true;
+			SpawnUnitWithKey.enabled = false;
+			SpawnTwoAndMove.enabled = true;
+		}
+
+			if(SpawnTwoUnitsAndMove.isComplete ()) {
+			SpawnTwoUnitsAndMove.GetComponent<SpawnTwoAndMove>().startThisObj = false;
+			SpawnTwoAndMove.enabled = false;
+			SelectRad.enabled = true;
 		}
 
 	}
