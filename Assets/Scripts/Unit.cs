@@ -78,7 +78,7 @@ public class Unit : MonoBehaviour {
 			Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
 		}
 
-		if(Input.GetMouseButton (0)) {
+		if(Input.GetMouseButton (0) && !gameManager.getPaused()) {
 			if (timeClicked == 0.0f) {
 				timeClicked = Time.time;
 			}
@@ -118,7 +118,7 @@ public class Unit : MonoBehaviour {
 		
 		else timeClicked = 0.0f;
 
-		if(Input.GetMouseButtonDown (0)) {
+		if(Input.GetMouseButtonDown (0) && !gameManager.getPaused()) {
 			if(gameManager.selectedUnits.Contains(this.gameObject)) {
 				gameManager.unitToRemove = this.gameObject;
 			} else {

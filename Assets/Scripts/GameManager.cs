@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
 
 	public Texture2D moveIcon;
 	public GameObject unitToRemove = null;
+	public bool UImouseOver = false;
 	public bool getPaused() {
 		return this.isPaused;
 	}
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour {
 		RaycastHit thisHit;
 
 		if (Physics.Raycast (tryRay, out thisHit, 5000)) {
-			if (selectedUnits.Count == 0) {
+			if (selectedUnits.Count == 0 || UImouseOver) {
 				Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
 			} else if (!(thisHit.transform.gameObject.tag == "Enemy" || thisHit.transform.gameObject.tag == "Objective"
 				|| thisHit.transform.gameObject.tag == "Player" || thisHit.transform.gameObject.tag == "Wall")) {
@@ -83,13 +84,19 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
+
+		if (Application.loadedLevelName.Equals("Tutorial") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
+			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
+			Application.LoadLevel ("Tutorial");
+		}
 		//Check if the level has been beaten (that is, there's no objective)
-		if (!Application.loadedLevelName.Equals (("Barracks")) && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
+		else if (!Application.loadedLevelName.Equals (("Barracks")) && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
 			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
 			unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
 			denarii = kills*100 + unitsLeft*100;
 			Application.LoadLevel ("Barracks");
 		}
+
 
 		//deselect units when ctrl+click or cmd+click is registered.
 		if(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)
@@ -104,7 +111,7 @@ public class GameManager : MonoBehaviour {
 
 
 		if (selectedUnits.Count > 0) {
-			if (Input.GetMouseButtonDown (0)) {
+			if (Input.GetMouseButtonDown (0) && !isPaused) {
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit;
 				
@@ -127,7 +134,7 @@ public class GameManager : MonoBehaviour {
 							if( (selectedUnit.name.Contains("Infantry") && 
 							    (hit.transform.tag.Equals ("Enemy") || hit.collider.gameObject.tag.Equals ("Objective")))
 							   	  || ((selectedUnit.name.Contains ("Artillery") || selectedUnit.name.Contains("Armor")) 
-							    	&& hit.collider.gameObject.tag.Equals ("Wall"))){
+							    && (hit.collider.gameObject.tag.Equals ("Wall"))|| hit.collider.gameObject.tag.Equals("Objective"))){
 								selectedUnit.GetComponent<Unit> ().target = hit.transform.gameObject;
 								selectedUnit.GetComponent<Unit> ().setNavMeshTarget ();
 							}

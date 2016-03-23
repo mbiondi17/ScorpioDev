@@ -122,21 +122,21 @@ public class Spawn : MonoBehaviour {
 				newUnit.GetComponent<Unit> ().attack = 10;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 4;
-				newUnit.GetComponent<Unit> ().range = 30;
+				newUnit.GetComponent<Unit> ().range = 5;
 
 			} else if (gameManager.upgradeLevelArmor == 2) {
 				newUnit.GetComponent<Unit>().health = 10;
 				newUnit.GetComponent<Unit> ().attack = 15;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 2;
-				newUnit.GetComponent<Unit> ().range = 30;
+				newUnit.GetComponent<Unit> ().range = 5;
 
 			} else if (gameManager.upgradeLevelArmor == 3) {
 				newUnit.GetComponent<Unit>().health = 15;
 				newUnit.GetComponent<Unit> ().attack = 15;
 				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 3;
-				newUnit.GetComponent<Unit> ().range = 30;
+				newUnit.GetComponent<Unit> ().range = 5;
 
 			} 
 

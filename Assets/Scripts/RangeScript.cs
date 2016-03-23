@@ -21,7 +21,7 @@ public class RangeScript : MonoBehaviour {
 	void OnTriggerStay(Collider co) {
 
 		if (((assignedUnit.GetComponent<Unit> ().name.Contains("Infantry") ||  assignedUnit.GetComponent<Unit> ().name.Contains("Archer"))
-		     && (co.tag == "Enemy" || co.tag == "Objective"))
+		     && co.tag == "Enemy")
 		    && Time.time > assignedUnit.GetComponent<Unit> ().nextFire) {
 			//Debug.Log("we did it " + this.name);
 			assignedUnit.GetComponent<Unit> ().nextFire = Time.time + 1/assignedUnit.GetComponent<Unit> ().speed;

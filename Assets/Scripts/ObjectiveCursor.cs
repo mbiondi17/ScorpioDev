@@ -10,7 +10,7 @@ public class ObjectiveCursor : MonoBehaviour {
 		GameManager gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		bool attackable = false;
 		foreach (GameObject unit in gameManager.selectedUnits) {
-			if(unit.name.Contains ("Infantry") || unit.name.Contains ("Archer")) {
+			if(unit.name.Contains ("Armor") || unit.name.Contains ("Artillery")) {
 				attackable = true;
 			}
 		}
