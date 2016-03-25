@@ -54,28 +54,28 @@ public class Spawn : MonoBehaviour {
 			infButton.GetComponentInChildren<Text>().text = "Infantry -- Left: " + infLeft;
 			//Level of spawned unit
 			if (gameManager.upgradeLevelInfantry == 1) {
-				newUnit.GetComponent<Unit>().health = 2;
-				newUnit.GetComponent<Unit> ().attack = 5;
+				newUnit.GetComponent<Unit>().health = 10;
+				newUnit.GetComponent<Unit> ().attack = 2;
 				newUnit.GetComponent<Unit> ().dex = 10;
-				newUnit.GetComponent<Unit>().speed = 4;
+				newUnit.GetComponent<Unit>().speed = 1;
 				newUnit.GetComponent<Unit> ().range = 6;
 			} else if (gameManager.upgradeLevelInfantry == 2) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 1;
 				newUnit.GetComponent<Unit> ().dex = 15;
-				newUnit.GetComponent<Unit>().speed = 5;
+				newUnit.GetComponent<Unit>().speed = 1;
 				newUnit.GetComponent<Unit> ().range = 6;
 			} else if (gameManager.upgradeLevelInfantry == 3) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 3;
 				newUnit.GetComponent<Unit> ().dex = 15;
-				newUnit.GetComponent<Unit>().speed = 6;
+				newUnit.GetComponent<Unit>().speed = 1;
 				newUnit.GetComponent<Unit> ().range = 6;
 			} else if (gameManager.upgradeLevelInfantry == 4) {
 				newUnit.GetComponent<Unit>().health = 5;
 				newUnit.GetComponent<Unit> ().attack = 5;
 				newUnit.GetComponent<Unit> ().dex = 25;
-				newUnit.GetComponent<Unit>().speed = 7;
+				newUnit.GetComponent<Unit>().speed = 1;
 				newUnit.GetComponent<Unit> ().range = 6;
 			}
 
