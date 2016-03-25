@@ -87,14 +87,14 @@ public class GameManager : MonoBehaviour {
 
 		if (Application.loadedLevelName.Equals("Tutorial") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
 			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
-			Application.LoadLevel ("Tutorial");
+			Application.LoadLevel ("Level1");
 		}
 		//Check if the level has been beaten (that is, there's no objective)
 		else if (!Application.loadedLevelName.Equals (("Barracks")) && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
 			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
 			unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
 			denarii = kills*100 + unitsLeft*100;
-			Application.LoadLevel ("Barracks");
+			Application.LoadLevel ("Tutorial");
 		}
 
 
