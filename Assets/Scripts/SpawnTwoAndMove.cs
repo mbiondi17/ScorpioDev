@@ -21,7 +21,6 @@ public class SpawnTwoAndMove : Objective {
 			IEnumerable currInf = (from unit in listOfUnits where unit.name.Contains ("Infantry") select unit);
 			List<GameObject> infList = new List<GameObject> ();
 			foreach (GameObject inf in currInf) {
-				Debug.Log (inf.GetComponent<Unit> ().targetPoint);
 				infList.Add (inf);
 				if (inf.GetComponent<Unit> ().targetPoint != Vector3.zero &&
 					inf.GetComponent<Unit> ().targetPoint != inf.GetComponent<Transform> ().position) {

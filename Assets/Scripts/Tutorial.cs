@@ -14,11 +14,8 @@ public class Tutorial : MonoBehaviour {
 	public Objective SpawnTwoUnitsAndMove;
 	public Objective SelectRadius;
 	public Objective SelectAllOfType;
-	public Objective SelectAll;
 	public Objective Deselect;
-	public Objective MoveMany;
 	public Objective AttackEnemy;
-	public Objective DestroyWall;
 	public Objective Win;
 
 	public Text MoveCam;
@@ -29,17 +26,17 @@ public class Tutorial : MonoBehaviour {
 	public Text SpawnTwoAndMove;
 	public Text SelectRad;
 	public Text SelectType;
-	public Text SlctAll;
 	public Text Dslct;
-	public Text MovMany;
 	public Text AtkEnemy;
-	public Text DestWall;
 	public Text WinTut;
 	public Text VictoryText;
 
-
 	private List<Objective> objectiveList = new List<Objective>();
 	private bool tutComplete;
+
+	public GameManager gameManager;
+	public GameObject enemy;
+	public GameObject stronghold;
 
 
 	// Use this for initialization
@@ -51,12 +48,9 @@ public class Tutorial : MonoBehaviour {
 		objectiveList.Add (SpawnOneUnitWithKey);
 		objectiveList.Add (SpawnTwoUnitsAndMove);
 		objectiveList.Add (SelectRadius);
-		objectiveList.Add (SelectAllOfType);
-		objectiveList.Add (SelectAll);
 		objectiveList.Add (Deselect);
-		objectiveList.Add (MoveMany);
+		objectiveList.Add (SelectAllOfType);
 		objectiveList.Add (AttackEnemy);
-		objectiveList.Add (DestroyWall);
 		objectiveList.Add (Win);
 
 		MoveCam.enabled = false;
@@ -66,12 +60,9 @@ public class Tutorial : MonoBehaviour {
 		SpawnUnitWithKey.enabled = false;
 		SpawnTwoAndMove.enabled = false;
 		SelectRad.enabled = false;
-		SelectType.enabled = false;
-		SlctAll.enabled = false;
 		Dslct.enabled = false;
-		MovMany.enabled = false;
+		SelectType.enabled = false;
 		AtkEnemy.enabled = false;
-		DestWall.enabled = false;
 		WinTut.enabled = false;
 		VictoryText.enabled = false;
 
@@ -119,12 +110,37 @@ public class Tutorial : MonoBehaviour {
 			SpawnTwoAndMove.enabled = true;
 		}
 
-			if(SpawnTwoUnitsAndMove.isComplete ()) {
+		if(SpawnTwoUnitsAndMove.isComplete () && !SelectRadius.isComplete()) {
 			SpawnTwoUnitsAndMove.GetComponent<SpawnTwoAndMove>().startThisObj = false;
 			SpawnTwoAndMove.enabled = false;
 			SelectRad.enabled = true;
 		}
 
+		if(SelectRadius.isComplete() && !Deselect.isComplete()) {
+			Deselect.GetComponent<Deselect>().startThisObj = true;
+			SelectRad.enabled = false;
+			Dslct.enabled = true;
+		}
+
+		if(Deselect.isComplete() && !SelectAllOfType.isComplete()) {
+			Dslct.enabled = false;
+			SelectType.enabled = true;
+		}
+
+		if(SelectAllOfType.isComplete() && !AttackEnemy.isComplete()) {
+			SelectType.enabled = false;
+			AtkEnemy.enabled = true;
+		}
+
+		if(AttackEnemy.isComplete() && !Win.isComplete()) {
+			AtkEnemy.enabled = false;
+			WinTut.enabled = true;
+		}
+
+		if(Win.isComplete()) {
+			WinTut.enabled = false;
+			VictoryText.enabled = true;
+		}
 	}
 }
 

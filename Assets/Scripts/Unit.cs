@@ -29,6 +29,8 @@ public class Unit : MonoBehaviour {
 	private float selectAllDelay = 1.0f;
 	private bool selectRadius = false;
 	private bool selectAll = false;
+
+	public Animator superAnimu;
 	
 	// Use this for initialization
 	void Start () {
@@ -36,11 +38,23 @@ public class Unit : MonoBehaviour {
 		audio = GetComponentsInParent<AudioSource>();
 		hitClip = audio [0].clip;
 		missClip = audio [1].clip;
+		superAnimu = GetComponentInChildren<Animator>();
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(this.name.Contains("Infantry")) {
+			if(Vector3.Distance(this.transform.position, GetComponent<NavMeshAgent>().destination) < 8.0f) {
+				superAnimu.SetBool("Walk", false);
+			}
+
+			if(target == null) {
+				superAnimu.SetBool ("Attack", false);
+
+			}
+		}
+
 		if (gameManager.selectedUnits.Contains(this.gameObject)) {
 			if (on == 0) {
 				this.GetComponentInParent<healthBar>().GetComponentInChildren<healthBar>().m_FullHealthColor = Color.blue;
@@ -70,6 +84,7 @@ public class Unit : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.0f);
 			this.GetComponent<NavMeshAgent>().destination = targetPoint;
 		}
+		if(this.name.Contains("Infantry")) superAnimu.SetBool ("Walk", true);
 	}
 
 	public void OnMouseOver() {

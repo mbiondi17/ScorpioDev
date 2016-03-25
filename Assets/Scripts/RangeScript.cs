@@ -23,7 +23,9 @@ public class RangeScript : MonoBehaviour {
 		if (((assignedUnit.GetComponent<Unit> ().name.Contains("Infantry") ||  assignedUnit.GetComponent<Unit> ().name.Contains("Archer"))
 		     && co.tag == "Enemy")
 		    && Time.time > assignedUnit.GetComponent<Unit> ().nextFire) {
-			//Debug.Log("we did it " + this.name);
+
+			GetComponentInParent<Unit>().superAnimu.SetBool ("Attack", true);
+
 			assignedUnit.GetComponent<Unit> ().nextFire = Time.time + 1/assignedUnit.GetComponent<Unit> ().speed;
 			healthBar health = co.GetComponentInChildren<healthBar>();
 			assignedUnit.GetComponent<NavMeshAgent>().destination = assignedUnit.GetComponent<Transform>().position;

@@ -55,7 +55,7 @@ public class Spawn : MonoBehaviour {
 			//Level of spawned unit
 			if (gameManager.upgradeLevelInfantry == 1) {
 				newUnit.GetComponent<Unit>().health = 2;
-				newUnit.GetComponent<Unit> ().attack = 1;
+				newUnit.GetComponent<Unit> ().attack = 5;
 				newUnit.GetComponent<Unit> ().dex = 10;
 				newUnit.GetComponent<Unit>().speed = 4;
 				newUnit.GetComponent<Unit> ().range = 6;
