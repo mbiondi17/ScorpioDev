@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class ZoomCamera : Objective {
-	
+
+	public bool startThisObj;
+
 	private bool zoomOutQ = false;
 	private bool zoomInE = false;
 	private bool zoomOutMouse = false;
@@ -16,12 +18,16 @@ public class ZoomCamera : Objective {
 	}
 	
 	void Update() {
-		
-		if(Input.GetKeyDown(KeyCode.Q)) zoomOutQ = true;
-		if(Input.GetKeyDown(KeyCode.E)) zoomInE = true;
-		if(Input.GetAxis("Mouse ScrollWheel") < 0) zoomInMouse = true;
-		if(Input.GetAxis("Mouse ScrollWheel") > 0) zoomOutMouse = true;
-		
+		if (startThisObj) {
+			if (Input.GetKeyDown (KeyCode.Q))
+				zoomOutQ = true;
+			if (Input.GetKeyDown (KeyCode.E))
+				zoomInE = true;
+			if (Input.GetAxis ("Mouse ScrollWheel") < 0)
+				zoomInMouse = true;
+			if (Input.GetAxis ("Mouse ScrollWheel") > 0)
+				zoomOutMouse = true;
+		}
 	}
 	
 	

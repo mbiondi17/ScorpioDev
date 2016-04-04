@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour {
 	public List<GameObject> selectedUnits = new List<GameObject>();
 	public GameObject objective = null;
 
-	public GameObject HelpMenu = null;
+	public GameObject HelpMenu;
+	public GameObject HelpMenuPrefab;
 
 //	public GUIText restartText;
 //	public GUIText gameOverText;
@@ -48,11 +49,12 @@ public class GameManager : MonoBehaviour {
 		{
 			Destroy(gameObject);
 		}
+
 	}
 
 	// Use this for initialization
 	void Start () {
-		objective = GameObject.FindGameObjectWithTag("Objective");
+
 		upgradeLevelInfantry = 2;
 		upgradeLevelArchers = 2;
 		upgradeLevelArtillery = 2;
@@ -72,6 +74,14 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (HelpMenu == null && objective == null) {
+
+			objective = GameObject.FindGameObjectWithTag ("Objective");
+			HelpMenu = (GameObject)Instantiate (HelpMenuPrefab, new Vector3 (450, 150, 0), Quaternion.identity);
+			HelpMenu.GetComponent<Transform> ().SetParent (GameObject.Find ("Canvas").transform);
+			HelpMenu.SetActive (false);
+		}
+
 		Ray tryRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit thisHit;
 
@@ -87,14 +97,14 @@ public class GameManager : MonoBehaviour {
 
 		if (Application.loadedLevelName.Equals("Tutorial") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
 			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
-			Application.LoadLevel ("Level1");
+			Application.LoadLevel ("main");
 		}
 		//Check if the level has been beaten (that is, there's no objective)
 		else if (!Application.loadedLevelName.Equals (("Barracks")) && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
 			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
 			unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
 			denarii = kills*100 + unitsLeft*100;
-			Application.LoadLevel ("Tutorial");
+			Application.LoadLevel ("Level1");
 		}
 
 

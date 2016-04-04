@@ -29,7 +29,6 @@ public class Tutorial : MonoBehaviour {
 	public Text Dslct;
 	public Text AtkEnemy;
 	public Text WinTut;
-	public Text VictoryText;
 
 	private List<Objective> objectiveList = new List<Objective>();
 	private bool tutComplete;
@@ -64,27 +63,30 @@ public class Tutorial : MonoBehaviour {
 		SelectType.enabled = false;
 		AtkEnemy.enabled = false;
 		WinTut.enabled = false;
-		VictoryText.enabled = false;
 
 	}
 		
 	void Update () {
 
 		if (!MoveCamera.isComplete ()) {
+				MoveCamera.GetComponent<MoveCamera>().startThisObj = true;
 				MoveCam.enabled = true;
 		}
 
 		if (MoveCamera.isComplete () && !ZoomCamera.isComplete ()) {
+				ZoomCamera.GetComponent<ZoomCamera>().startThisObj = true;
 				MoveCam.enabled = false;
 				ZoomCam.enabled = true;
 		}
 
 		if(ZoomCamera.isComplete () && !SpawnOneUnitWithButton.isComplete()) {
+				SpawnOneUnitWithButton.GetComponent<SpawnOneUnitWithButton>().startThisObj = true;
 				ZoomCam.enabled = false;
 				SpawnOneUnitWithButt.enabled = true;
 		}
 
 		if (SpawnOneUnitWithButton.isComplete () && !MoveUnit.isComplete()) {
+			MoveUnit.GetComponent<MoveUnit>().startThisObj = true;
 			SpawnOneUnitWithButt.enabled = false;
 			MvUnit.enabled = true;
 		}
@@ -95,6 +97,7 @@ public class Tutorial : MonoBehaviour {
 		}
 
 		if (MoveUnit.isComplete () && !SpawnOneUnitWithKey.isComplete()) {
+			SpawnOneUnitWithKey.GetComponent<SpawnUnitWithKey>().startThisObj = true;
 			MvUnit.enabled = false;
 			SpawnUnitWithKey.enabled = true;
 		}
@@ -111,7 +114,7 @@ public class Tutorial : MonoBehaviour {
 		}
 
 		if(SpawnTwoUnitsAndMove.isComplete () && !SelectRadius.isComplete()) {
-			SpawnTwoUnitsAndMove.GetComponent<SpawnTwoAndMove>().startThisObj = false;
+			SelectRadius.GetComponent<SelectRadius>().startThisObj = true;
 			SpawnTwoAndMove.enabled = false;
 			SelectRad.enabled = true;
 		}
@@ -123,23 +126,21 @@ public class Tutorial : MonoBehaviour {
 		}
 
 		if(Deselect.isComplete() && !SelectAllOfType.isComplete()) {
+			SelectAllOfType.GetComponent<SelectAllOfType>().startThisObj = true;
 			Dslct.enabled = false;
 			SelectType.enabled = true;
 		}
 
 		if(SelectAllOfType.isComplete() && !AttackEnemy.isComplete()) {
+			AttackEnemy.GetComponent<AttackEnemy>().startThisObj = true;
 			SelectType.enabled = false;
 			AtkEnemy.enabled = true;
 		}
 
 		if(AttackEnemy.isComplete() && !Win.isComplete()) {
+			Win.GetComponent<Win>().startThisObj = true;
 			AtkEnemy.enabled = false;
 			WinTut.enabled = true;
-		}
-
-		if(Win.isComplete()) {
-			WinTut.enabled = false;
-			VictoryText.enabled = true;
 		}
 	}
 }

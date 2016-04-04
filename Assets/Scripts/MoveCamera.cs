@@ -3,6 +3,8 @@ using System.Collections;
 
 public class MoveCamera : Objective {
 
+	public bool startThisObj;
+
 	private bool movedLeft = false;
 	private bool movedRight = false;
 	private bool movedUp = false;
@@ -16,12 +18,16 @@ public class MoveCamera : Objective {
 	}
 
 	void Update() {
-
-		if(Input.GetKeyDown(KeyCode.W)) movedUp = true;
-		if(Input.GetKeyDown(KeyCode.S)) movedDown = true;
-		if(Input.GetKeyDown(KeyCode.A)) movedLeft = true;
-		if(Input.GetKeyDown(KeyCode.D)) movedRight = true;
-
+		if (startThisObj) {
+			if (Input.GetKeyDown (KeyCode.W))
+				movedUp = true;
+			if (Input.GetKeyDown (KeyCode.S))
+				movedDown = true;
+			if (Input.GetKeyDown (KeyCode.A))
+				movedLeft = true;
+			if (Input.GetKeyDown (KeyCode.D))
+				movedRight = true;
+		}
 	}
 
 

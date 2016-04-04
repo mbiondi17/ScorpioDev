@@ -4,7 +4,9 @@ using System.Linq;
 using System.Collections.Generic;
 
 public class SelectRadius : Objective {
-	
+
+	public bool startThisObj;
+
 	private bool selected2 = false;
 	
 	override public bool isComplete() {
@@ -12,9 +14,11 @@ public class SelectRadius : Objective {
 	}
 	
 	void Update() {
-		
-		if(GetComponentInParent<Tutorial>().gameManager.selectedUnits.Count >= 2) {
-			selected2 = true;
+		if (startThisObj) {
+
+			if (GetComponentInParent<Tutorial> ().gameManager.selectedUnits.Count >= 2) {
+				selected2 = true;
+			}
 		}
 	}
 

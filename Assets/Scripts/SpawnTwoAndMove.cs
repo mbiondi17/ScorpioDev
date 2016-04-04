@@ -39,8 +39,10 @@ public class SpawnTwoAndMove : Objective {
 				}
 			}
 			
-			if (infList.Count >= 3)
+			if (infList.Count >= 3) {
 				spawnedBoth = true;
+				startThisObj = false;
+			}
 		}
 	}
 	
