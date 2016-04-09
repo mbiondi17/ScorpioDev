@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour {
 	public GameObject objective = null;
 
 	public GameObject HelpMenu;
-	public GameObject HelpMenuPrefab;
 
 //	public GUIText restartText;
 //	public GUIText gameOverText;
@@ -54,7 +53,6 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
 		upgradeLevelInfantry = 2;
 		upgradeLevelArchers = 2;
 		upgradeLevelArtillery = 2;
@@ -63,8 +61,6 @@ public class GameManager : MonoBehaviour {
 
 		kills = 0;
 		unitsLeft = 0;
-
-		HelpMenu = GameObject.Find("Canvas").GetComponentInChildren<HelpMenu>().gameObject;
 
 //		gameOver = false;
 //		restart = false;
@@ -75,6 +71,12 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(HelpMenu == null) {
+			Debug.Log("Hi I'm Unity and I'm a stupid piece of SHIT!");
+			HelpMenu = GameObject.Find ("Canvas").transform.FindChild("Help Menu").gameObject;
+
+		} 
 
 		Ray tryRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit thisHit;
