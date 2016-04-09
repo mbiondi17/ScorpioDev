@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour {
 			isPaused = !isPaused;
 			if(isPaused) {
 				Time.timeScale = 0.0f;
-				HelpMenu.GetComponent<RectTransform>().localPosition = new Vector3(100, -150, 0);
+				HelpMenu.GetComponent<RectTransform>().localPosition = new Vector3(100, 0, 0);
 			}
 			else {
 				Time.timeScale = 1.0f;
