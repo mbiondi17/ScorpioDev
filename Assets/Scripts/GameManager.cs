@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour {
 		kills = 0;
 		unitsLeft = 0;
 
+		HelpMenu = GameObject.Find("Canvas").GetComponentInChildren<HelpMenu>().gameObject;
+
 //		gameOver = false;
 //		restart = false;
 //
@@ -73,14 +75,6 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (HelpMenu == null && objective == null) {
-
-			objective = GameObject.FindGameObjectWithTag ("Objective");
-			HelpMenu = (GameObject)Instantiate (HelpMenuPrefab, new Vector3 (450, 150, 0), Quaternion.identity);
-			HelpMenu.GetComponent<Transform> ().SetParent (GameObject.Find ("Canvas").transform);
-			HelpMenu.SetActive (false);
-		}
 
 		Ray tryRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit thisHit;
@@ -224,12 +218,14 @@ public class GameManager : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			isPaused = !isPaused;
-			HelpMenu.SetActive(isPaused);
 			if(isPaused) {
 				Time.timeScale = 0.0f;
+				HelpMenu.GetComponent<RectTransform>().localPosition = new Vector3(100, -150, 0);
 			}
 			else {
 				Time.timeScale = 1.0f;
+				HelpMenu.GetComponent<RectTransform>().localPosition = new Vector3(1000, 1000, 0);
+				
 			}
 		}
 	
