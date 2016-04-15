@@ -16,10 +16,14 @@ public class EnemyUnit : MonoBehaviour {
 	public bool isStatic = false;
 
 	public float nextFire = 0.0f;
+
+	//toggles for differing level AI
+	private bool level1AI;
 	
 	// Use this for initialization
 	void Start () {
-
+		if (Application.loadedLevelName.Equals("Level1")) level1AI = true;
+		else level1AI = false;
 	}
 	
 	// Update is called once per frame
@@ -27,6 +31,22 @@ public class EnemyUnit : MonoBehaviour {
 		if (target != null && !isStatic) {
 			GetComponent<NavMeshAgent> ().destination = target.transform.position;
 		} 
+
+		if(level1AI && target == null) {
+			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+			GameObject closestPlayer = null;
+			float closestDist = 9999999.0f;
+			foreach(GameObject unit in players) {
+				if(Vector3.Distance(transform.position, unit.transform.position) < closestDist) {
+					closestDist = Vector3.Distance(transform.position, unit.transform.position);
+					closestPlayer = unit;
+				}
+			}
+			if(closestPlayer != null) {
+				target = closestPlayer;
+			}
+		}
+
 	}
 
 	
@@ -36,6 +56,7 @@ public class EnemyUnit : MonoBehaviour {
 				GetComponent<NavMeshAgent>().destination = GetComponent<Transform>().position;
 				nextFire = Time.time + 1 / speed;
 				healthBar health = co.GetComponentInChildren<healthBar> ();
+				Debug.Log (co.GetComponent<Unit>().health);
 				if (health) {
 					int hit = Random.Range (0, 101);
 					if (hit <= 100 - co.GetComponent<Unit> ().dex) {

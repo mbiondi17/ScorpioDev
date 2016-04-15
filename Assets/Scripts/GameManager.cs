@@ -72,10 +72,8 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(HelpMenu == null) {
-			Debug.Log("Hi I'm Unity and I'm a stupid piece of SHIT!");
+		if(HelpMenu == null && !Application.loadedLevelName.Equals("main")) {
 			HelpMenu = GameObject.Find ("Canvas").transform.FindChild("Help Menu").gameObject;
-
 		} 
 
 		Ray tryRay = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -96,11 +94,11 @@ public class GameManager : MonoBehaviour {
 			Application.LoadLevel ("main");
 		}
 		//Check if the level has been beaten (that is, there's no objective)
-		else if (!Application.loadedLevelName.Equals (("Barracks")) && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
+		else if (Application.loadedLevelName.Equals ("Level1") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
 			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
 			unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
 			denarii = kills*100 + unitsLeft*100;
-			Application.LoadLevel ("Level1");
+			Application.LoadLevel ("main");
 		}
 
 

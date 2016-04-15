@@ -49,6 +49,7 @@ public class RangeScript : MonoBehaviour {
 			}
 			else {
 				assignedUnit.GetComponent<Unit> ().target = null;
+				GetComponentInParent<Unit>().superAnimu.SetBool ("Attack", false);
 			}
 			
 			

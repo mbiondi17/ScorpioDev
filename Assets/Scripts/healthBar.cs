@@ -28,7 +28,7 @@ public class healthBar : MonoBehaviour {
 	{
 		// Reduce current health by the amount of damage done.
 		m_CurrentHealth -= damage;
-		
+
 		// Change the UI elements appropriately.
 		SetHealthUI ();
 			

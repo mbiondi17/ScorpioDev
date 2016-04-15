@@ -62,7 +62,7 @@ public class Spawn : MonoBehaviour {
 			} else if (gameManager.upgradeLevelInfantry == 2) {
 				newUnit.GetComponent<Unit>().health = 4;
 				newUnit.GetComponent<Unit> ().attack = 1;
-				newUnit.GetComponent<Unit> ().dex = 15;
+				newUnit.GetComponent<Unit> ().dex = 0;
 				newUnit.GetComponent<Unit>().speed = 1;
 				newUnit.GetComponent<Unit> ().range = 6;
 			} else if (gameManager.upgradeLevelInfantry == 3) {

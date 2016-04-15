@@ -7,7 +7,7 @@ public class AggroScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (assignedUnit.GetComponent<EnemyUnit> ().isStatic) {
+		if (assignedUnit.GetComponent<EnemyUnit> ().isStatic || assignedUnit.name.Contains ("Bow")) {
 			GetComponent<SphereCollider>().radius = assignedUnit.GetComponent<EnemyUnit>().range;
 		}
 	}
@@ -28,7 +28,7 @@ public class AggroScript : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider co) {
-		if (assignedUnit.GetComponent<EnemyUnit> ().isStatic) {
+		if (assignedUnit.GetComponent<EnemyUnit> ().isStatic || assignedUnit.name.Contains ("Bow")) {
 			if (this.tag != "Objective") {
 				if ((co.tag == "Player") && Time.time > assignedUnit.GetComponent<EnemyUnit> ().nextFire) {
 					assignedUnit.GetComponent<EnemyUnit> ().nextFire = Time.time + 1 / assignedUnit.GetComponent<EnemyUnit> ().speed;

@@ -9,6 +9,10 @@ public class Unit : MonoBehaviour {
 	
 	public float roundsPerSecond = 1;
 	public float nextFire = 0.0f;
+
+	//Level-specific stats and fields
+	//isRunning is used in Level 1, so that normal player units are not destroyed.
+	public bool isRunning;
 	
 	public int health = 10;
 	public int attack = 2; 
