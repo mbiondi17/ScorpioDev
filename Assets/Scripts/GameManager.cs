@@ -16,6 +16,31 @@ public class GameManager : MonoBehaviour {
 //	private bool gameOver;
 //	private bool restart;
 
+	//Carry stats for upgraded units between levels!
+	public int infHealth;
+	public int infDex;
+	public int infRange;
+	public int infSpeed;
+	public int infAttack;
+
+	public int archHealth;
+	public int archDex;
+	public int archRange;
+	public int archSpeed;
+	public int archAttack;
+
+	public int armHealth;
+	public int armDex;
+	public int armRange;
+	public int armSpeed;
+	public int armAttack;	
+
+	public int artHealth;
+	public int artDex;
+	public int artRange;
+	public int artSpeed;
+	public int artAttack;
+
 	private bool isPaused = false;
 
 	public int nextLevel = 1;
@@ -27,11 +52,6 @@ public class GameManager : MonoBehaviour {
 	public int freeZMax = 0;
 	public int freeXMin = 0;
 	public int freeZMin = 0;
-	
-	public int upgradeLevelInfantry;
-	public int upgradeLevelArchers;
-	public int upgradeLevelArtillery;
-	public int upgradeLevelArmor;
 
 	public Texture2D moveIcon;
 	public GameObject unitToRemove = null;
@@ -53,12 +73,32 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		upgradeLevelInfantry = 2;
-		upgradeLevelArchers = 2;
-		upgradeLevelArtillery = 2;
-		upgradeLevelArmor = 2;
-		denarii = 10000;
 
+		infHealth = 0;
+		infDex = 0;
+		infRange = 0;
+		infSpeed = 0;
+		infAttack = 0;
+		
+		archHealth = 0;
+		archDex = 0;
+		archRange = 0;
+		archSpeed = 0;
+		archAttack = 0;
+		
+		armHealth = 0;
+		armDex = 0;
+		armRange = 0;
+		armSpeed = 0;
+		armAttack = 0;	
+		
+		artHealth = 0;
+		artDex = 0;
+		artRange = 0;
+		artSpeed = 0;
+		artAttack = 0;
+
+		denarii = 2000;
 		kills = 0;
 		unitsLeft = 0;
 
@@ -90,18 +130,24 @@ public class GameManager : MonoBehaviour {
 
 
 		if (Application.loadedLevelName.Equals("Tutorial") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
-			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
 			Application.LoadLevel ("main");
 		}
 		//Check if the level has been beaten (that is, there's no objective)
 		else if (Application.loadedLevelName.Equals ("Level1") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
 			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
 			unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
-			denarii = kills*100 + unitsLeft*100;
-			Application.LoadLevel ("main");
+			denarii += kills*100 + unitsLeft*100;
+			Application.LoadLevel ("Level2");
 		}
 
-
+		else if (Application.loadedLevelName.Equals ("Level1") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
+			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
+			unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
+			denarii += kills*100 + unitsLeft*100;
+			Application.LoadLevel ("Level2");
+		}
+		
+		
 		//deselect units when ctrl+click or cmd+click is registered.
 		if(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)
 		   || Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand))
@@ -186,9 +232,14 @@ public class GameManager : MonoBehaviour {
 		}
 
 		//Quit the level on "ESC"
-		if (Input.GetKey("escape") && !isPaused)
-			Application.Quit();
-
+		if (Input.GetKey("escape") && !isPaused) {
+			if(!Application.loadedLevelName.Equals("main")) {
+				Application.LoadLevel("main");
+			}
+			else {
+				Application.Quit();
+			}
+		}
 		//
 		// keys 1, 2, and 3 also spawn units
 		//
