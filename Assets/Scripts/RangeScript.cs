@@ -34,15 +34,15 @@ public class RangeScript : MonoBehaviour {
 				int hit = Random.Range(0, 101);
 				if(co.tag != "Objective") {
 					if(hit <= 100 - co.GetComponent<EnemyUnit>().dex) {
-						assignedUnit.GetComponent<Unit> ().audio[0].PlayOneShot (assignedUnit.GetComponent<Unit> ().hitClip);
+						assignedUnit.GetComponent<Unit> ().GetComponents<AudioSource>()[0].PlayOneShot (assignedUnit.GetComponent<Unit> ().hitClip);
 						health.decrease(assignedUnit.GetComponent<Unit> ().attack);
 					}
 					else {
-						assignedUnit.GetComponent<Unit> ().audio[1].PlayOneShot (assignedUnit.GetComponent<Unit> ().missClip);
+						assignedUnit.GetComponent<Unit> ().GetComponents<AudioSource>()[1].PlayOneShot (assignedUnit.GetComponent<Unit> ().missClip);
 					}
 				}
 				else {
-					assignedUnit.GetComponent<Unit> ().audio[0].PlayOneShot(assignedUnit.GetComponent<Unit> ().hitClip);
+					assignedUnit.GetComponent<Unit> ().GetComponents<AudioSource>()[0].PlayOneShot(assignedUnit.GetComponent<Unit> ().hitClip);
 					health.decrease (assignedUnit.GetComponent<Unit> ().attack);
 				}
 				

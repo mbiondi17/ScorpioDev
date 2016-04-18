@@ -18,11 +18,13 @@ public class Level1Manager : MonoBehaviour {
 	public int friendliesSaved;
 	private float time;
 
+	private GameManager gameManager;
+
 	// Use this for initialization
 	void Start () {
 		time = Time.time;
 		victoryTextObj.GetComponent<RectTransform>().localPosition = new Vector3(1000,1000,0);
-
+		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 	}
 	
 	// Update is called once per frame
@@ -38,6 +40,11 @@ public class Level1Manager : MonoBehaviour {
 			if(enemiesSpawned < 15 && friendliesSpawned < 15) {
 				if(friendliesSpawned % 2 == 0) {
 					GameObject newFriendly = (GameObject)Instantiate(InfantryPrefab, PlayerSpawn1.transform.position, Quaternion.identity);
+					newFriendly.GetComponent<Unit>().attack = gameManager.infAttack;
+					newFriendly.GetComponent<Unit>().dex = gameManager.infDex;
+					newFriendly.GetComponent<Unit>().range = gameManager.infRange;
+					newFriendly.GetComponent<Unit>().health = gameManager.infHealth;
+					newFriendly.GetComponent<Unit>().speed = gameManager.infSpeed;
 					newFriendly.GetComponent<Unit>().isRunning = true;
 					newFriendly.GetComponent<Unit>().target = safety;
 					newFriendly.GetComponent<Unit>().setNavMeshTarget();
@@ -45,6 +52,11 @@ public class Level1Manager : MonoBehaviour {
 				}
 				else {
 					GameObject newFriendly = (GameObject)Instantiate(InfantryPrefab, PlayerSpawn2.transform.position, Quaternion.identity);
+					newFriendly.GetComponent<Unit>().attack = gameManager.infAttack;
+					newFriendly.GetComponent<Unit>().dex = gameManager.infDex;
+					newFriendly.GetComponent<Unit>().range = gameManager.infRange;
+					newFriendly.GetComponent<Unit>().health = gameManager.infHealth;
+					newFriendly.GetComponent<Unit>().speed = gameManager.infSpeed;
 					newFriendly.GetComponent<Unit>().isRunning = true;
 					newFriendly.GetComponent<Unit>().target = safety;
 					newFriendly.GetComponent<Unit>().setNavMeshTarget();

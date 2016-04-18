@@ -20,7 +20,7 @@ public class Unit : MonoBehaviour {
 	public float range = 5.0f;
 	public float speed = 1;
 	
-	public AudioSource[] audio;
+	public AudioSource[] audioList;
 	public AudioClip hitClip;
 	public AudioClip missClip;
 	
@@ -39,9 +39,9 @@ public class Unit : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-		audio = GetComponentsInParent<AudioSource>();
-		hitClip = audio [0].clip;
-		missClip = audio [1].clip;
+		audioList = GetComponentsInParent<AudioSource>();
+		hitClip = audioList [0].clip;
+		missClip = audioList [1].clip;
 		superAnimu = GetComponentInChildren<Animator>();
 		
 	}

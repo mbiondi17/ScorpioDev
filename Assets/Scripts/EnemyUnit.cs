@@ -56,7 +56,6 @@ public class EnemyUnit : MonoBehaviour {
 				GetComponent<NavMeshAgent>().destination = GetComponent<Transform>().position;
 				nextFire = Time.time + 1 / speed;
 				healthBar health = co.GetComponentInChildren<healthBar> ();
-				Debug.Log (co.GetComponent<Unit>().health);
 				if (health) {
 					int hit = Random.Range (0, 101);
 					if (hit <= 100 - co.GetComponent<Unit> ().dex) {

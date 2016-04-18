@@ -52,8 +52,8 @@ public class Spawn : MonoBehaviour {
 			gameManager.GetComponent<GameManager> ().selectedUnits.Add(newUnit);
 			infLeft--;
 			infButton.GetComponentInChildren<Text>().text = "Infantry -- Left: " + infLeft;
-			//Set stats of spawned unit with proper stats from GameManager
 
+			//Set stats of spawned unit with proper stats from GameManager
 			newUnit.GetComponent<Unit>().health = gameManager.GetComponent<GameManager> ().infHealth;
 			newUnit.GetComponent<Unit> ().attack = gameManager.GetComponent<GameManager> ().infAttack;
 			newUnit.GetComponent<Unit> ().dex = gameManager.GetComponent<GameManager> ().infDex;

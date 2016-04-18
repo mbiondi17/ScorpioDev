@@ -21,7 +21,6 @@ public class MoveUnit : Objective {
 		if (startThisObj) {
 			GameObject[] listOfUnits = GameObject.FindGameObjectsWithTag ("Player");
 			IEnumerable currInfantry = (from unit in listOfUnits where unit.name.Contains ("Infantry") select unit);
-			List<GameObject> infList = new List<GameObject> ();
 			foreach (GameObject inf in currInfantry) {
 				if (inf.GetComponent<Unit> ().targetPoint != Vector3.zero &&
 					inf.GetComponent<Unit> ().targetPoint != inf.GetComponent<Transform> ().position) {

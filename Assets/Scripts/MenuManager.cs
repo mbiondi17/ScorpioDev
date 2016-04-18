@@ -8,6 +8,6 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void CampagignStart() {
-		Application.LoadLevel ("Level1");
+		Application.LoadLevel ("Barracks");
 	}
 }

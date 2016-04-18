@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
@@ -20,30 +21,30 @@ public class GameManager : MonoBehaviour {
 	public int infHealth;
 	public int infDex;
 	public int infRange;
-	public int infSpeed;
+	public float infSpeed;
 	public int infAttack;
 
 	public int archHealth;
 	public int archDex;
 	public int archRange;
-	public int archSpeed;
+	public float archSpeed;
 	public int archAttack;
 
 	public int armHealth;
 	public int armDex;
 	public int armRange;
-	public int armSpeed;
+	public float armSpeed;
 	public int armAttack;	
 
 	public int artHealth;
 	public int artDex;
 	public int artRange;
-	public int artSpeed;
+	public float artSpeed;
 	public int artAttack;
 
 	private bool isPaused = false;
 
-	public int nextLevel = 1;
+	public string nextLevel = "Level1";
 	public int denarii;
 	public int kills = 0;
 	public int unitsLeft = 0;
@@ -73,32 +74,33 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (infHealth == 0) {
+			infHealth = 10;
+			infDex = 15;
+			infRange = 6;
+			infSpeed = 1.0f;
+			infAttack = 2;
+			
+			archHealth = 10;
+			archDex = 25;
+			archRange = 35;
+			archSpeed = 1.25f;
+			archAttack = 1;
+			
+			armHealth = 20;
+			armDex = 0;
+			armRange = 6;
+			armSpeed = 0.5f;
+			armAttack = 2;	
+			
+			artHealth = 15;
+			artDex = 0;
+			artRange = 30;
+			artSpeed = 1.0f;
+			artAttack = 2;
+		}
 
-		infHealth = 0;
-		infDex = 0;
-		infRange = 0;
-		infSpeed = 0;
-		infAttack = 0;
-		
-		archHealth = 0;
-		archDex = 0;
-		archRange = 0;
-		archSpeed = 0;
-		archAttack = 0;
-		
-		armHealth = 0;
-		armDex = 0;
-		armRange = 0;
-		armSpeed = 0;
-		armAttack = 0;	
-		
-		artHealth = 0;
-		artDex = 0;
-		artRange = 0;
-		artSpeed = 0;
-		artAttack = 0;
-
-		denarii = 2000;
+		denarii = 100000;
 		kills = 0;
 		unitsLeft = 0;
 
@@ -112,10 +114,16 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(HelpMenu == null && !Application.loadedLevelName.Equals("main")) {
+		//Fixes issue with Help Menu disappearing after each level is loaded
+		if(HelpMenu == null && !Application.loadedLevelName.Equals("main") 
+		   && !Application.loadedLevelName.Equals ("Barracks") 
+		   && !Application.loadedLevelName.Contains ("Transition")) {
+			Destroy(GameObject.FindGameObjectWithTag("BarracksCanvas"));
 			HelpMenu = GameObject.Find ("Canvas").transform.FindChild("Help Menu").gameObject;
+
 		} 
 
+		//Make cursor into move cursor if the raycast doesn't intersect an invalid destination
 		Ray tryRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit thisHit;
 
@@ -128,24 +136,44 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
+		//************************************************************************************************************
+		//
+		// Handling level Progression
+		//
+		//************************************************************************************************************
 
-		if (Application.loadedLevelName.Equals("Tutorial") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
-			Application.LoadLevel ("main");
-		}
-		//Check if the level has been beaten (that is, there's no objective)
-		else if (Application.loadedLevelName.Equals ("Level1") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
-			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
-			unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
-			denarii += kills*100 + unitsLeft*100;
-			Application.LoadLevel ("Level2");
+		if (GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
+
+			//The tutorial Level, when beaten, loops back to the main menu
+			if (Application.loadedLevelName.Equals ("Tutorial")) {
+				Application.LoadLevel ("main");
+			}
+
+			//Every other level progresses as follows: Level -> Next Level Exposition --> Barracks --> Next Level
+			else if (Application.loadedLevelName.Equals ("Level1")) {
+				nextLevel = "Level2";
+				Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn> ();
+				unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
+				denarii += kills * 100 + unitsLeft * 100;
+				Application.LoadLevel ("Transition1-2");
+			}
+			else if (Application.loadedLevelName.Equals ("Level2")) {
+				nextLevel = "Level3";
+				Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn> ();
+				unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
+				denarii += kills * 100 + unitsLeft * 100;
+				Application.LoadLevel ("Transition2-3");
+			}
+
 		}
 
-		else if (Application.loadedLevelName.Equals ("Level1") && GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
-			Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn>();
-			unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
-			denarii += kills*100 + unitsLeft*100;
-			Application.LoadLevel ("Level2");
-		}
+
+
+		//************************************************************************************************************
+		//
+		// Actual Game Handling
+		//
+		//************************************************************************************************************
 		
 		
 		//deselect units when ctrl+click or cmd+click is registered.
@@ -211,6 +239,8 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
+
+
 		if(unitToRemove != null) {
 			selectedUnits.Remove(unitToRemove);
 			unitToRemove = null;
@@ -223,7 +253,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 
-		//Reset the current level. For development purposes.
+		//Reset the current level.
 		if(Input.GetKeyDown(KeyCode.R) && !isPaused) 
 		{
 

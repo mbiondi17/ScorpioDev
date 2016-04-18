@@ -5,7 +5,7 @@ public class HelpMenu : MonoBehaviour {
 
 	public void Awake()
 	{
-		DontDestroyOnLoad(transform.gameObject);
+		//DontDestroyOnLoad(transform.gameObject);
 
 
 	}
