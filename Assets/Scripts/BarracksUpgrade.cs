@@ -14,8 +14,7 @@ public class BarracksUpgrade : MonoBehaviour {
 	public Text upgradeLifeArchers;
 	public Text upgradeDexArchers;
 	public Text upgradeRngArchers;
-
-
+	
 	public Text upgradeAtkArtillery;
 	public Text upgradeLifeArtillery;
 	public Text upgradeRngArtillery;
@@ -37,13 +36,26 @@ public class BarracksUpgrade : MonoBehaviour {
 	
 	public GameManager gameManager;
 
+	void Update() {
+		GameObject[] bCanv = GameObject.FindGameObjectsWithTag ("BarracksCanvas");
+		if (bCanv.Length > 1) {
+			foreach (GameObject bcanv in bCanv) {
+				if (bcanv.transform.FindChild ("Denarii").GetComponent<Text> ().text == "<Denarii>") {
+					Destroy (bcanv);
+				}
+			}
+		}
 
+	}
+	
 	//Initialize all upgrade buttons to display the proper stats and available upgrades
-	void Awake() {
+	void Start() {
 		//GameManager used to edit denarii remaining and get/change stats
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-		denarii = GetComponentInParent<GameManager>().denarii;
+		denarii = gameManager.denarii;
+		Debug.Log ("Denarii: " + denarii);
+
 		denariiTextBox.text = "Denarii: " + denarii;
 
 		//Set all upgrade texts to the proper values
@@ -71,7 +83,7 @@ public class BarracksUpgrade : MonoBehaviour {
 		upgradeRngArtillery.text = "Next Upgrade: Supple Wood (+5 Rng) Cost: 500";
 		upgradeLifeArtillery.text = "Next Upgrade: Iron Reinforced (+3 Life) Cost: 400";
 	}
-	
+
 	public void upgradeInfantryAtk() {
 
 		int currAtk = gameManager.infAttack;

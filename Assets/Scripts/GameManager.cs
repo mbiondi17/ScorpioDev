@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject objective = null;
 
 	public GameObject HelpMenu;
+	public GameObject BarracksCanvas;
 
 //	public GUIText restartText;
 //	public GUIText gameOverText;
@@ -117,11 +118,15 @@ public class GameManager : MonoBehaviour {
 		//Fixes issue with Help Menu disappearing after each level is loaded
 		if(HelpMenu == null && !Application.loadedLevelName.Equals("main") 
 		   && !Application.loadedLevelName.Equals ("Barracks") 
-		   && !Application.loadedLevelName.Contains ("Transition")) {
-			Destroy(GameObject.FindGameObjectWithTag("BarracksCanvas"));
+		   && !Application.loadedLevelName.Contains ("Transition")) 
+		{
+			BarracksCanvas.SetActive(false);
 			HelpMenu = GameObject.Find ("Canvas").transform.FindChild("Help Menu").gameObject;
 
 		} 
+		if (Application.loadedLevelName.Equals ("Barracks")) {
+			BarracksCanvas.SetActive(true);
+		}
 
 		//Make cursor into move cursor if the raycast doesn't intersect an invalid destination
 		Ray tryRay = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -218,8 +223,6 @@ public class GameManager : MonoBehaviour {
 							}
 
 							else {
-//								if((hit.point.x > freeXMin) && (hit.point.x < freeXMax) 
-//							        && (hit.point.z > freeZMin) && (hit.point.z < freeZMax)){
 								selectedUnit.GetComponent<Unit> ().target = null;
 								selectedUnit.GetComponent<Unit> ().targetPoint = hit.point;
 								selectedUnit.GetComponent<Unit> ().setNavMeshTarget();
@@ -256,7 +259,7 @@ public class GameManager : MonoBehaviour {
 		//Reset the current level.
 		if(Input.GetKeyDown(KeyCode.R) && !isPaused) 
 		{
-
+			Debug.Log ("Reset");
 			Application.LoadLevel (Application.loadedLevel);
 
 		}
@@ -271,7 +274,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		//
-		// keys 1, 2, and 3 also spawn units
+		// keys 1, 2, 3, and 4 also spawn units
 		//
 		if(Input.GetKeyDown(KeyCode.Alpha1) && !isPaused) {
 			
