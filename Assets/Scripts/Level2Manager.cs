@@ -42,7 +42,6 @@ public class Level2Manager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
 		if(enemiesLeft == 0) {
 			victoryTextObj.GetComponent<RectTransform>().localPosition = new Vector3(100,0,0);
 			Invoke("destroy", 5.0f);
@@ -50,7 +49,7 @@ public class Level2Manager : MonoBehaviour {
 		enemies.AddRange(GameObject.FindGameObjectsWithTag ("Enemy"));
 		enemiesLeft = enemies.Count;
 
-		if (Time.time > 0.0f + time && Time.time < 45.0f + time) {
+		if (Time.time > time && Time.time < 45.0f + time) {
 			phase1 = true;
 			phase2 = false;
 			phase3 = false;
