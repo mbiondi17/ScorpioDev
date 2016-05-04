@@ -19,11 +19,36 @@ public class EnemyUnit : MonoBehaviour {
 
 	//toggles for differing level AI
 	private bool level1AI;
+	private bool level2AI;
+	private bool level3AI;
 	
 	// Use this for initialization
 	void Start () {
-		if (Application.loadedLevelName.Equals("Level1")) level1AI = true;
-		else level1AI = false;
+		level1AI = false;
+		level2AI = false;
+		level3AI = false;
+		if (Application.loadedLevelName.Equals ("Level1")) {
+			level1AI = true;
+			health = 15;
+			attack = 2;
+			dex = 15;
+			range = 5.0f;
+			speed = 1;
+		} else if (Application.loadedLevelName.Equals ("Level2")) {
+			level2AI = true;
+			health = 16;
+			attack = 3;
+			dex = 16;
+			range = 5.0f;
+			speed = 1;
+		} else if (Application.loadedLevelName.Equals ("Level3")) {
+			level3AI = true;
+			health = 16;
+			attack = 3;
+			dex = 16;
+			range = 5.0f;
+			speed = 1;
+		}
 	}
 	
 	// Update is called once per frame

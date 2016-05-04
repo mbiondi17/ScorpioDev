@@ -443,7 +443,7 @@ public class BarracksUpgrade : MonoBehaviour {
 
 	private void updateCurrInfText () {
 		currentTextInfantry.text = 
-			" Roman Legionary" +
+			"Roman Legionary" +
 			"\nAttack: " + gameManager.infAttack +
 			"\nLife: " + gameManager.infHealth +
 			"\nDexterity: " + gameManager.infDex + "%" +
