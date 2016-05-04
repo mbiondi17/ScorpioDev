@@ -19,9 +19,12 @@ public class Level2Manager : MonoBehaviour {
 
 	public GameObject victoryTextObj;
 
+	private GameObject target;
+	public GameObject collider;
 	private int enemiesLeft;
 	private float time;
 	private float spawnTime;
+	private bool validTarget;
 	private bool phase1;
 	private bool phase2;
 	private bool phase3;
@@ -42,6 +45,7 @@ public class Level2Manager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		Debug.Log ("Time: " + spawnTime);
 		if(enemiesLeft == 0) {
 			victoryTextObj.GetComponent<RectTransform>().localPosition = new Vector3(100,0,0);
 			Invoke("destroy", 5.0f);
@@ -50,6 +54,7 @@ public class Level2Manager : MonoBehaviour {
 		enemiesLeft = enemies.Count;
 
 		if (Time.time > time && Time.time < 45.0f + time) {
+			Debug.Log ("In phase 1");
 			phase1 = true;
 			phase2 = false;
 			phase3 = false;
@@ -72,23 +77,30 @@ public class Level2Manager : MonoBehaviour {
 		}
 
 		if (phase1) {
-			if (Time.time >= 1.0f + spawnTime) {
+			if (Time.time >= 15.0f + spawnTime) {
 				GameObject newEnemy = (GameObject)Instantiate (BowRiderPrefab, EnemySpawn1.transform.position, Quaternion.identity);
 				GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
 				GameObject closestPlayer = null;
 				float closestDist = 9999999.0f;
+				OnTriggerEnter(collider);
+				if (validTarget) {
+					closestPlayer = target;
+				}/*
 				foreach (GameObject unit in players) {
 					float dist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
-					if (dist < 500f && dist < closestDist) {
+					if (OnTriggerEnter(co) && dist < closestDist) {
 						closestDist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
 						closestPlayer = unit;
 					}
-				}
+
+				}*/
+				spawnTime = Time.time;
+
 				if (closestPlayer != null) {
 					newEnemy.GetComponent<EnemyUnit> ().target = closestPlayer;
 				}
+
 			}
-			spawnTime = Time.time;
 		} else if (phase2) {
 			if (Time.time >= 15.0f + spawnTime) {
 				GameObject newEnemy = (GameObject)Instantiate (SacredBandPrefab, EnemySpawn1.transform.position, Quaternion.identity);
@@ -97,17 +109,17 @@ public class Level2Manager : MonoBehaviour {
 				GameObject closestPlayer = null;
 				float closestDist = 9999999.0f;
 				foreach (GameObject unit in players) {
-					float dist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
-					if (dist < 500f && dist < closestDist) {
+					if (validTarget && Vector3.Distance (newEnemy.transform.position, unit.transform.position) < closestDist) {
 						closestDist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
 						closestPlayer = unit;
 					}
 				}
+				spawnTime = Time.time;
+
 				if (closestPlayer != null) {
 					newEnemy.GetComponent<EnemyUnit> ().target = closestPlayer;
 				}
 			}
-			spawnTime = Time.time;
 		} else if (phase3) {
 			if (Time.time >= 15.0f + spawnTime) {
 				GameObject newEnemy = (GameObject)Instantiate (WarChariotPrefab, EnemySpawn1.transform.position, Quaternion.identity);
@@ -124,8 +136,9 @@ public class Level2Manager : MonoBehaviour {
 				if (closestPlayer != null) {
 					newEnemy.GetComponent<EnemyUnit> ().target = closestPlayer;
 				}
+				spawnTime = Time.time;
+
 			}
-			spawnTime = Time.time;
 		} else if (phase4) {
 			if (Time.time >= 15.0f + spawnTime) {
 				GameObject newEnemy = (GameObject)Instantiate (ElephantPrefab, EnemySpawn1.transform.position, Quaternion.identity);
@@ -142,8 +155,9 @@ public class Level2Manager : MonoBehaviour {
 				if (closestPlayer != null) {
 					newEnemy.GetComponent<EnemyUnit> ().target = closestPlayer;
 				}
+				spawnTime = Time.time;
+
 			}
-			spawnTime = Time.time;
 		}
 		/*
 		if(Time.time >= 5.0f + time) {
@@ -219,6 +233,13 @@ public class Level2Manager : MonoBehaviour {
 			time = Time.time;
 		}*/
 	}
+	void OnTriggerEnter(Collider co) {
+		if (co.tag == "Player") {
+			validTarget = true;
+			target = co.gameObject;
+		}
+	}
+
 
 	void destroy() {
 		Destroy(this.gameObject);
