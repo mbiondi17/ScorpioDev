@@ -20,7 +20,7 @@ public class Level2Manager : MonoBehaviour {
 	public GameObject victoryTextObj;
 
 	private GameObject target;
-	public GameObject collider;
+	public Collider collider;
 	private int enemiesLeft;
 	private float time;
 	private float spawnTime;
@@ -52,7 +52,9 @@ public class Level2Manager : MonoBehaviour {
 		}
 		enemies.AddRange(GameObject.FindGameObjectsWithTag ("Enemy"));
 		enemiesLeft = enemies.Count;
-
+		foreach (GameObject enemy in enemies) {
+			if (target != null) enemy.GetComponent<EnemyUnit> ().target = target;
+		}
 		if (Time.time > time && Time.time < 45.0f + time) {
 			Debug.Log ("In phase 1");
 			phase1 = true;
@@ -79,84 +81,22 @@ public class Level2Manager : MonoBehaviour {
 		if (phase1) {
 			if (Time.time >= 15.0f + spawnTime) {
 				GameObject newEnemy = (GameObject)Instantiate (BowRiderPrefab, EnemySpawn1.transform.position, Quaternion.identity);
-				GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
-				GameObject closestPlayer = null;
-				float closestDist = 9999999.0f;
-				OnTriggerEnter(collider);
-				if (validTarget) {
-					closestPlayer = target;
-				}/*
-				foreach (GameObject unit in players) {
-					float dist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
-					if (OnTriggerEnter(co) && dist < closestDist) {
-						closestDist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
-						closestPlayer = unit;
-					}
-
-				}*/
 				spawnTime = Time.time;
-
-				if (closestPlayer != null) {
-					newEnemy.GetComponent<EnemyUnit> ().target = closestPlayer;
-				}
-
 			}
 		} else if (phase2) {
 			if (Time.time >= 15.0f + spawnTime) {
 				GameObject newEnemy = (GameObject)Instantiate (SacredBandPrefab, EnemySpawn1.transform.position, Quaternion.identity);
-				newEnemy.GetComponent<NavMeshAgent> ().speed = 30;
-				GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
-				GameObject closestPlayer = null;
-				float closestDist = 9999999.0f;
-				foreach (GameObject unit in players) {
-					if (validTarget && Vector3.Distance (newEnemy.transform.position, unit.transform.position) < closestDist) {
-						closestDist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
-						closestPlayer = unit;
-					}
-				}
 				spawnTime = Time.time;
-
-				if (closestPlayer != null) {
-					newEnemy.GetComponent<EnemyUnit> ().target = closestPlayer;
-				}
 			}
 		} else if (phase3) {
 			if (Time.time >= 15.0f + spawnTime) {
 				GameObject newEnemy = (GameObject)Instantiate (WarChariotPrefab, EnemySpawn1.transform.position, Quaternion.identity);
-				GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
-				GameObject closestPlayer = null;
-				float closestDist = 9999999.0f;
-				foreach (GameObject unit in players) {
-					float dist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
-					if (dist < 500f && dist < closestDist) {
-						closestDist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
-						closestPlayer = unit;
-					}
-				}
-				if (closestPlayer != null) {
-					newEnemy.GetComponent<EnemyUnit> ().target = closestPlayer;
-				}
 				spawnTime = Time.time;
-
 			}
 		} else if (phase4) {
 			if (Time.time >= 15.0f + spawnTime) {
 				GameObject newEnemy = (GameObject)Instantiate (ElephantPrefab, EnemySpawn1.transform.position, Quaternion.identity);
-				GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
-				GameObject closestPlayer = null;
-				float closestDist = 9999999.0f;
-				foreach (GameObject unit in players) {
-					float dist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
-					if (dist < 500f && dist < closestDist) {
-						closestDist = Vector3.Distance (newEnemy.transform.position, unit.transform.position);
-						closestPlayer = unit;
-					}
-				}
-				if (closestPlayer != null) {
-					newEnemy.GetComponent<EnemyUnit> ().target = closestPlayer;
-				}
 				spawnTime = Time.time;
-
 			}
 		}
 		/*
@@ -233,6 +173,7 @@ public class Level2Manager : MonoBehaviour {
 			time = Time.time;
 		}*/
 	}
+
 	void OnTriggerEnter(Collider co) {
 		if (co.tag == "Player") {
 			validTarget = true;
