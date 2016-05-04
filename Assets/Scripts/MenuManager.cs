@@ -10,4 +10,10 @@ public class MenuManager : MonoBehaviour {
 	public void CampagignStart() {
 		Application.LoadLevel ("Barracks");
 	}
+
+	void Update() { 
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			Application.Quit();
+		}
+	}
 }
