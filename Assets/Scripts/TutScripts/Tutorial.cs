@@ -141,7 +141,7 @@ public class Tutorial : MonoBehaviour {
 			Win.GetComponent<Win>().startThisObj = true;
 			AtkEnemy.enabled = false;
 			WinTut.enabled = true;
-		}
+	}
 	}
 }
 

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class SelectAllOfType : Objective {
 
 	public bool startThisObj;
-
+	public GameManager gameManager;
 
 	private bool selected3 = false;
 	
@@ -15,9 +15,11 @@ public class SelectAllOfType : Objective {
 	}
 	// Update is called once per frame
 	void Update () {
-		if (startThisObj) {
-			if (GetComponentInParent<Tutorial> ().gameManager.selectedUnits.Count == 3) {
-				selected3 = true;
+		if(!gameManager.isPaused) {
+			if (startThisObj) {
+				if (GetComponentInParent<Tutorial> ().gameManager.selectedUnits.Count == 3) {
+					selected3 = true;
+				}
 			}
 		}
 	}

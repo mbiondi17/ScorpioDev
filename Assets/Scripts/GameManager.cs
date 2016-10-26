@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 	public float artSpeed;
 	public int artAttack;
 
-	private bool isPaused = false;
+	public bool isPaused = false;
 
 	public string nextLevel = "Level1";
 	public int denarii;

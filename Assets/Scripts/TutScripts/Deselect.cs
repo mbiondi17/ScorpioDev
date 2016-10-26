@@ -7,15 +7,19 @@ public class Deselect : Objective {
 
 	public bool startThisObj = false;
 	private bool noneSelected = false;
-	
+	public GameManager gameManager;
+
 	override public bool isComplete() {
 		return noneSelected;
 	}
 	// Update is called once per frame
 	void Update () {
-		if(startThisObj) {
-			if(GetComponentInParent<Tutorial>().gameManager.selectedUnits.Count == 0) {
-				noneSelected = true;
+		if(!gameManager.isPaused) {
+
+			if(startThisObj) {
+				if(GetComponentInParent<Tutorial>().gameManager.selectedUnits.Count == 0) {
+					noneSelected = true;
+				}
 			}
 		}
 	}

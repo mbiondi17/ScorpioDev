@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class AttackEnemy : Objective {
 
 	public bool startThisObj;
+	public GameManager gameManager;
 
 	private bool enemyKilled = false;
 	
@@ -14,9 +15,11 @@ public class AttackEnemy : Objective {
 	}
 	// Update is called once per frame
 	void Update () {
-		if (startThisObj) {
-			if (GetComponentInParent<Tutorial> ().enemy == null) {
-				enemyKilled = true;
+		if(!gameManager.isPaused) {
+			if (startThisObj) {
+				if (GetComponentInParent<Tutorial> ().enemy == null) {
+					enemyKilled = true;
+				}
 			}
 		}
 	}

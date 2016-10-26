@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Win : Objective {
 
 	public bool startThisObj;
+	public GameManager gameManager;
 
 	private bool objectiveDestroyed = false;
 	
@@ -14,10 +15,11 @@ public class Win : Objective {
 	}
 	// Update is called once per frame
 	void Update () {
-
-		if (startThisObj) {
-			if (GetComponentInParent<Tutorial> ().stronghold == null) {
-				objectiveDestroyed = true;
+		if(!gameManager.isPaused) {
+			if (startThisObj) {
+				if (GetComponentInParent<Tutorial> ().stronghold == null) {
+					objectiveDestroyed = true;
+				}
 			}
 		}
 	}

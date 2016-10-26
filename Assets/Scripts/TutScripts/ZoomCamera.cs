@@ -4,6 +4,8 @@ using System.Collections;
 public class ZoomCamera : Objective {
 
 	public bool startThisObj;
+	public GameManager gameManager;
+
 
 	private bool zoomOutQ = false;
 	private bool zoomInE = false;
@@ -18,15 +20,17 @@ public class ZoomCamera : Objective {
 	}
 	
 	void Update() {
-		if (startThisObj) {
-			if (Input.GetKeyDown (KeyCode.Q))
-				zoomOutQ = true;
-			if (Input.GetKeyDown (KeyCode.E))
-				zoomInE = true;
-			if (Input.GetAxis ("Mouse ScrollWheel") < 0)
-				zoomInMouse = true;
-			if (Input.GetAxis ("Mouse ScrollWheel") > 0)
-				zoomOutMouse = true;
+		if(!gameManager.isPaused) {
+			if (startThisObj) {
+				if (Input.GetKeyDown (KeyCode.Q))
+					zoomOutQ = true;
+				if (Input.GetKeyDown (KeyCode.E))
+					zoomInE = true;
+				if (Input.GetAxis ("Mouse ScrollWheel") < 0)
+					zoomInMouse = true;
+				if (Input.GetAxis ("Mouse ScrollWheel") > 0)
+					zoomOutMouse = true;
+			}
 		}
 	}
 	

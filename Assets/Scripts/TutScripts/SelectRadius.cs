@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class SelectRadius : Objective {
 
 	public bool startThisObj;
+	public GameManager gameManager;
+
 
 	private bool selected2 = false;
 	
@@ -14,14 +16,13 @@ public class SelectRadius : Objective {
 	}
 	
 	void Update() {
-		if (startThisObj) {
-
-			if (GetComponentInParent<Tutorial> ().gameManager.selectedUnits.Count >= 2) {
-				selected2 = true;
+		if(!gameManager.isPaused) {
+			if (startThisObj) {
+				if (GetComponentInParent<Tutorial> ().gameManager.selectedUnits.Count >= 2) {
+					selected2 = true;
+				}
 			}
+
 		}
 	}
-
-	
-	
 }	
