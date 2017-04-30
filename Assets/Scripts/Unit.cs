@@ -49,7 +49,7 @@ public class Unit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(this.name.Contains("Infantry")) {
-			if(Vector3.Distance(this.transform.position, GetComponent<NavMeshAgent>().destination) < 8.0f) {
+			if(Vector3.Distance(this.transform.position, GetComponent<UnityEngine.AI.NavMeshAgent>().destination) < 8.0f) {
 				superAnimu.SetBool("Walk", false);
 			}
 
@@ -80,13 +80,13 @@ public class Unit : MonoBehaviour {
 			Vector3 direction = (target.transform.position - transform.position).normalized;
 			Quaternion lookRotation = Quaternion.LookRotation(direction);
 			transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.0f);
-			this.GetComponent<NavMeshAgent>().destination = target.transform.position;
+			this.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = target.transform.position;
 		}
 		else if(targetPoint != new Vector3(0,0,0)) {
 			Vector3 direction = (targetPoint - transform.position).normalized;
 			Quaternion lookRotation = Quaternion.LookRotation(direction);
 			transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1.0f);
-			this.GetComponent<NavMeshAgent>().destination = targetPoint;
+			this.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = targetPoint;
 		}
 		if(this.name.Contains("Infantry")) superAnimu.SetBool ("Walk", true);
 	}

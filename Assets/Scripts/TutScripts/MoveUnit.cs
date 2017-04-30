@@ -29,7 +29,7 @@ public class MoveUnit : Objective {
 					} else if (inf.GetComponent<Unit> ().target != null) {
 						targetedEnemy = true;
 						if (!moved) {
-							inf.GetComponent<NavMeshAgent> ().destination = inf.GetComponent<Transform> ().position;
+							inf.GetComponent<UnityEngine.AI.NavMeshAgent> ().destination = inf.GetComponent<Transform> ().position;
 						}
 					}
 				}

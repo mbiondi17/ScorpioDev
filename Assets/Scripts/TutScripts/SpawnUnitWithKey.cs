@@ -31,7 +31,7 @@ public class SpawnUnitWithKey : Objective {
 					} else if (arm.GetComponent<Unit> ().target != null) {
 						targetedEnemy = true;
 						if (!moved) {
-							arm.GetComponent<NavMeshAgent> ().destination = arm.GetComponent<Transform> ().position;
+							arm.GetComponent<UnityEngine.AI.NavMeshAgent> ().destination = arm.GetComponent<Transform> ().position;
 						}
 					}
 				}

@@ -54,7 +54,7 @@ public class EnemyUnit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (target != null && !isStatic) {
-			GetComponent<NavMeshAgent> ().destination = target.transform.position;
+			GetComponent<UnityEngine.AI.NavMeshAgent> ().destination = target.transform.position;
 		} 
 
 		if(level1AI && target == null) {
@@ -77,7 +77,7 @@ public class EnemyUnit : MonoBehaviour {
 	void OnTriggerStay(Collider co) {
 		if (this.tag != "Objective") {
 			if ((co.tag == "Player") && Time.time > nextFire) {
-				GetComponent<NavMeshAgent>().destination = GetComponent<Transform>().position;
+				GetComponent<UnityEngine.AI.NavMeshAgent>().destination = GetComponent<Transform>().position;
 				nextFire = Time.time + 1 / speed;
 				healthBar health = co.GetComponentInChildren<healthBar> ();
 				if (health) {

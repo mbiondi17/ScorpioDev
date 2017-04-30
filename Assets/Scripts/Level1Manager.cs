@@ -85,7 +85,7 @@ public class Level1Manager : MonoBehaviour {
 				}
 				else {
 					GameObject newEnemy = (GameObject)Instantiate(SacredBandPrefab, EnemySpawn.transform.position, Quaternion.identity);
-					newEnemy.GetComponent<NavMeshAgent>().speed = 30;
+					newEnemy.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = 30;
 					GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 					GameObject closestPlayer = null;
 					float closestDist = 9999999.0f;

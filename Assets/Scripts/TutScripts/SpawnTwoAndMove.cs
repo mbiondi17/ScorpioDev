@@ -36,7 +36,7 @@ public class SpawnTwoAndMove : Objective {
 							if (moved1)
 								moved2 = true;
 						} else {
-							inf.GetComponent<NavMeshAgent> ().destination = inf.GetComponent<Transform> ().position;
+							inf.GetComponent<UnityEngine.AI.NavMeshAgent> ().destination = inf.GetComponent<Transform> ().position;
 							movedTooFar = true;
 						}
 					}

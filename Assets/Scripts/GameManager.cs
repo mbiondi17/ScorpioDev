@@ -232,7 +232,7 @@ public class GameManager : MonoBehaviour {
 					}
 					else {
 						foreach(GameObject unit in selectedUnits) {
-							unit.GetComponent<NavMeshAgent>().destination = unit.transform.position;
+							unit.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = unit.transform.position;
 							unit.GetComponent<Unit>().target = null;
 							unit.GetComponent<Unit>().targetPoint = unit.transform.position;
 

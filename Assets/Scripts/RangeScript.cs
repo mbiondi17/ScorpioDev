@@ -28,7 +28,7 @@ public class RangeScript : MonoBehaviour {
 
 			assignedUnit.GetComponent<Unit> ().nextFire = Time.time + 1/assignedUnit.GetComponent<Unit> ().speed;
 			healthBar health = co.GetComponentInChildren<healthBar>();
-			assignedUnit.GetComponent<NavMeshAgent>().destination = assignedUnit.GetComponent<Transform>().position;
+			assignedUnit.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = assignedUnit.GetComponent<Transform>().position;
 			if(health) 
 			{
 				int hit = Random.Range(0, 101);
@@ -59,7 +59,7 @@ public class RangeScript : MonoBehaviour {
 		         && co.gameObject == assignedUnit.GetComponent<Unit> ().target) && Time.time > assignedUnit.GetComponent<Unit> ().nextFire) {
 
 			assignedUnit.GetComponent<Unit> ().nextFire = Time.time + 1/(assignedUnit.GetComponent<Unit> ().speed);
-			assignedUnit.GetComponent<NavMeshAgent>().destination = assignedUnit.GetComponent<Transform>().position;
+			assignedUnit.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = assignedUnit.GetComponent<Transform>().position;
 			//Debug.Log("We're here!");
 			if(co.GetComponentInParent<Renderer>().material.mainTexture == assignedUnit.GetComponent<Unit> ().woodMaterials[0].mainTexture) {
 				co.GetComponentInParent<Renderer>().material = assignedUnit.GetComponent<Unit> ().woodMaterials[1];
