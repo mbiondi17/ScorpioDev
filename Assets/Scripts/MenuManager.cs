@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MenuManager : MonoBehaviour {
 
 	public void TutorialStart() {
-		Application.LoadLevel ("Tutorial");
+		SceneManager.LoadScene ("Tutorial");
 	}
 
 	public void CampagignStart() {
-		Application.LoadLevel ("Barracks");
+		SceneManager.LoadScene ("Barracks");
 	}
 
 	void Update() { 

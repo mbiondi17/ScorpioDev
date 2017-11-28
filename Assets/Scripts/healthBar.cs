@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -55,6 +56,9 @@ public class healthBar : MonoBehaviour {
 
 		if (gameObject.tag == "Enemy") {
 			GameObject.Find("GameManager").GetComponent<GameManager>().kills++;
+			if(SceneManager.GetActiveScene().name == "Level2") {
+				GameObject.Find("Level2Manager").GetComponent<Level2Manager>().EnemyDied();
+			}
 		}
 		Destroy(gameObject);
 			

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class EnemyUnit : MonoBehaviour {
@@ -19,30 +20,17 @@ public class EnemyUnit : MonoBehaviour {
 
 	//toggles for differing level AI
 	private bool level1AI;
-	private bool level2AI;
-	private bool level3AI;
 	
 	// Use this for initialization
 	void Start () {
-		level1AI = false;
-		level2AI = false;
-		level3AI = false;
-		if (Application.loadedLevelName.Equals ("Level1")) {
-			level1AI = true;
+		level1AI = true;
+		if (SceneManager.GetActiveScene().name.Equals ("Level1")) {
 			health = 15;
 			attack = 2;
 			dex = 15;
 			range = 5.0f;
 			speed = 1;
-		} else if (Application.loadedLevelName.Equals ("Level2")) {
-			level2AI = true;
-			health = 16;
-			attack = 3;
-			dex = 16;
-			range = 5.0f;
-			speed = 1;
-		} else if (Application.loadedLevelName.Equals ("Level3")) {
-			level3AI = true;
+		} else if (SceneManager.GetActiveScene().name.Equals ("Level2")) {
 			health = 16;
 			attack = 3;
 			dex = 16;

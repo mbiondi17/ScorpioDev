@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour {
 			artAttack = 2;
 		}
 
-		denarii = 100000;
+		denarii = 2000;
 		kills = 0;
 		unitsLeft = 0;
 
@@ -116,15 +117,15 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 
 		//Fixes issue with Help Menu disappearing after each level is loaded
-		if(HelpMenu == null && !Application.loadedLevelName.Equals("main") 
-		   && !Application.loadedLevelName.Equals ("Barracks") 
-		   && !Application.loadedLevelName.Contains ("Transition")) 
+		if(HelpMenu == null && !SceneManager.GetActiveScene().name.Equals("main") 
+		   && !SceneManager.GetActiveScene().name.Equals ("Barracks") 
+		   && !SceneManager.GetActiveScene().name.Contains ("Transition")) 
 		{
 			BarracksCanvas.SetActive(false);
 			HelpMenu = GameObject.Find ("Canvas").transform.FindChild("Help Menu").gameObject;
 
 		} 
-		if (Application.loadedLevelName.Equals ("Barracks")) {
+		if (SceneManager.GetActiveScene().name.Equals ("Barracks")) {
 			BarracksCanvas.SetActive(true);
 		}
 
@@ -150,24 +151,24 @@ public class GameManager : MonoBehaviour {
 		if (GameObject.FindGameObjectsWithTag ("Objective").GetLength (0) == 0) {
 
 			//The tutorial Level, when beaten, loops back to the main menu
-			if (Application.loadedLevelName.Equals ("Tutorial")) {
-				Application.LoadLevel ("main");
+			if (SceneManager.GetActiveScene().name.Equals ("Tutorial")) {
+				SceneManager.LoadScene("main");
 			}
 
 			//Every other level progresses as follows: Level -> Next Level Exposition --> Barracks --> Next Level
-			else if (Application.loadedLevelName.Equals ("Level1")) {
+			else if (SceneManager.GetActiveScene().name.Equals ("Level1")) {
 				nextLevel = "Level2";
 				Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn> ();
 				unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
 				denarii += kills * 100 + unitsLeft * 100;
-				Application.LoadLevel ("Transition1-2");
+				SceneManager.LoadScene("Transition1-2");
 			}
-			else if (Application.loadedLevelName.Equals ("Level2")) {
+			else if (SceneManager.GetActiveScene().name.Equals ("Level2")) {
 				nextLevel = "Level3";
 				Spawn spawn = GameObject.Find ("Spawn1").GetComponent<Spawn> ();
 				unitsLeft = spawn.archLeft + spawn.infLeft + spawn.artLeft + spawn.armLeft;
 				denarii += kills * 100 + unitsLeft * 100;
-				Application.LoadLevel ("Transition2-3");
+				SceneManager.LoadScene("Transition2-3");
 			}
 
 		}
@@ -260,14 +261,14 @@ public class GameManager : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.R) && !isPaused) 
 		{
 			Debug.Log ("Reset");
-			Application.LoadLevel (Application.loadedLevel);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
 		}
 
 		//Quit the level on "ESC"
 		if (Input.GetKey("escape") && !isPaused) {
-			if(!Application.loadedLevelName.Equals("main")) {
-				Application.LoadLevel("main");
+			if(!SceneManager.GetActiveScene().name.Equals("main")) {
+				SceneManager.LoadScene("main");
 			}
 			else {
 				Application.Quit();

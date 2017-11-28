@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class NextLevel : MonoBehaviour {
@@ -15,13 +16,13 @@ public class NextLevel : MonoBehaviour {
 	}
 
 	public void Update(){
-		if (!Application.loadedLevelName.Equals ("Barracks"))
+		if (!SceneManager.GetActiveScene().name.Equals ("Barracks"))
 			gameObject.GetComponent<Canvas>().enabled = false;
 		else
 			gameObject.GetComponent<Canvas>().enabled = true;
 	}
 	//FOR TEST BUILD, THIS WAS CHANGED TO JUST LOOP ONE LEVEL
 	public void LoadScene() {
-		Application.LoadLevel (GameObject.Find ("GameManager").GetComponent<GameManager>().nextLevel);
+		SceneManager.LoadScene (GameObject.Find ("GameManager").GetComponent<GameManager>().nextLevel);
 	}
 }

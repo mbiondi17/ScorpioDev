@@ -20,11 +20,9 @@ public class Spawn : MonoBehaviour {
 	public int artLeft = 1;
 	public int archLeft = 1;
 
-	public GameManager gameManager;
-	public GameObject newUnit = null;
-	public bool targetFound = false;
-
-	public bool isPaused = false;
+	private GameManager gameManager;
+	private GameObject newUnit = null;
+	private bool isPaused = false;
 	
 	void Start(){
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Level1Manager : MonoBehaviour {
@@ -10,8 +11,10 @@ public class Level1Manager : MonoBehaviour {
 	public GameObject SacredBandPrefab;
 	public GameObject BowRiderPrefab;
 	public GameObject safety;
+	public float timeLimit;
 
 	public GameObject victoryTextObj;
+	public GameObject defeatTextObj;
 
 	private int friendliesSpawned;
 	private int enemiesSpawned;
@@ -22,20 +25,22 @@ public class Level1Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		time = Time.time;
+		time = Time.timeSinceLevelLoad;
 		victoryTextObj.GetComponent<RectTransform>().localPosition = new Vector3(1000,1000,0);
+		defeatTextObj.GetComponent<RectTransform>().localPosition = new Vector3(1000,1000,0);		
 		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
-	}
+		if( timeLimit < 110.0f) timeLimit = 110.0f; // 15 (spawn occurrences) * 5 (time between spawns) = 75, + 5 (start time) = 80, + 30 for travel to spawn.
+	}	
 	
 	// Update is called once per frame
 	void Update () {
 
-		if(friendliesSaved >= 10) {
+		if(friendliesSaved >= 8) {
 			victoryTextObj.GetComponent<RectTransform>().localPosition = new Vector3(100,0,0);
 			Invoke("destroy", 5.0f);
 		}
 
-		if(Time.time >= 5.0f + time) {
+		if(Time.timeSinceLevelLoad >= 5.0f + time) {
 
 			if(enemiesSpawned < 15 && friendliesSpawned < 15) {
 				if(friendliesSpawned % 2 == 0) {
@@ -105,11 +110,19 @@ public class Level1Manager : MonoBehaviour {
 				}
 			}
 
-			time = Time.time;
+			time = Time.timeSinceLevelLoad;
+		}
+		if(Time.timeSinceLevelLoad > timeLimit) {
+			defeatTextObj.GetComponent<RectTransform>().localPosition = new Vector3(100,0,0);
+			Invoke("restart", 5.0f);
 		}
 	}
 
 	void destroy() {
 		Destroy(this.gameObject);
+	}
+
+	void restart() {
+		SceneManager.LoadScene("Barracks");
 	}
 }
